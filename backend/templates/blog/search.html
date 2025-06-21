@@ -1,0 +1,92 @@
+{% load app %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial;
+  padding: 20px;
+  background: #f1f1f1;
+}
+
+.header {
+  padding: 2px;
+  font-size: 40px;
+  text-align: center;
+  background: white;
+}
+
+.leftcolumn {   
+  float: left;
+  width: 100%;
+}
+
+.card {
+   background-color: white;
+   padding: 20px;
+   margin-top: 20px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media screen and (max-width: 800px) {
+  .leftcolumn, .rightcolumn {   
+    width: 100%;
+    padding: 0;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+    <p><form>
+      <input type="search" value="{% if searched %} {% else %}{{ text_search }}{% endif %}" 
+          name="q" type="text" 
+          placeholder=" 検索ワードを入力 "required>
+      <button>検索</button>
+    </form></p>
+  <h2>med's Blog</h2>
+</div>
+
+<div class="row">
+    {% if searched %}
+  <h2>検索結果</h2>
+  {% if not articles%}
+    <p>該当する記事はありません。</p>
+  {% endif %}
+{% endif %}
+
+    <form>
+      <input type="search" value="{{request.GET.q|default:''}}" 
+          name="q" type="text" 
+          placeholder=" 検索ワードを入力 "required>
+      <button>検索</button>
+    </form>
+  <div class="leftcolumn">
+    {% for article in articles %}
+    <div class="card">
+      <a style = "text-decoration: none; color : black; " href = "/blog/article/{{article.id}}">
+        <h2>{{article.title}}</h2>
+        {% for tag in article.tag.all%}
+        <span>{{tag.name}}</span>
+        {% endfor %}
+        <p>{{article.summary|truncatewords:20}}</p>
+        <p>{{article.created_day|date:"Y/n/j "}}</p>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+</body>
+</html>

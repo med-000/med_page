@@ -1,0 +1,47 @@
+
+{% load app %}
+<!-- 記事の本文 -->
+<a href="/blog">
+    <p>戻る</p>
+</a>    
+<div class="main-content">
+  <!-- 本文（TOCは含めない） -->
+  {{ article.content|markdown_to_html }}
+</div>
+
+<div class="sidebar">
+  <h4>目次</h4>
+  {% extract_toc article.content %}
+</div>
+
+
+{% for comment in comments %}
+{{comment.commentater}}<br>
+{{ comment.content}}<br>
+{{comment.day|date:"Y/n/j "}}<br>
+<p>------</p>
+{% endfor %}
+<form method = "POST">
+    {% csrf_token %}
+    <label for="comment">ニックネーム:</label><br>
+  <input type="text" id="author" name="author" placeholder="あなたの名前を入力" required ><br>
+    <label for="comment">コメント:</label><br>
+  <textarea id="comment" name="comment" rows="4" cols="50" placeholder="コメントを入力してください..."required></textarea><br>
+  <button type="submit">送信</button>
+</form>
+{% for article in articles|slice:":5"%}
+    <div class="card">
+      <a style = "text-decoration: none; color : black; " href = "/blog/article/{{article.id}}">
+        <h2>{{article.title}}</h2>
+        {% for tag in article.tag.all%}
+        <span>{{tag.name}}</span>
+        {% endfor %}
+        <p>{{article.summary|truncatewords:20}}</p>
+        <p>{{article.created_day|date:"Y/n/j "}}</p>
+      </a>
+    </div>
+    {% endfor %}
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
