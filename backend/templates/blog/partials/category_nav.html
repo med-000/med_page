@@ -1,4 +1,7 @@
 <form id="search-form" method="GET" action="">
+        {% if request.GET.q %}
+        <input type="hidden" name="q" value="{{ request.GET.q }}">
+        {% endif %}
         {% for tag in mainbar_tags%}
         <input type="checkbox" name="tags" value="{{tag.name}}"
         {% if tag.name in mainbar_selecteds %}checked{% endif %}/>

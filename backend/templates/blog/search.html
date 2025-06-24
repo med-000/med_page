@@ -1,3 +1,22 @@
+{% extends 'blog/home_base.html' %}
+{% block title%}
+  med's blog home
+{% endblock %}
+{% block content %}
+{% if searched %}
+  <h2>検索結果</h2>
+  {% if not articles%}
+    <p>該当する記事はありません。</p>
+  {% endif %}
+{% endif %}
+
+    <form>
+      <input type="search" value="{{request.GET.q|default:''}}" 
+          name="q" type="text" 
+          placeholder=" 検索ワードを入力 "required>
+      <button>検索</button>
+    </form>
+{% endblock %}
 <!--
 {% load app %}
 <!DOCTYPE html>

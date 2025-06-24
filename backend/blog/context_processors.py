@@ -17,5 +17,6 @@ def sidebar_context(request):
     return {'sidebar_tags':tags,'sidebar_categories':categories,'sidebar_archive_dates':archive_dates}
 
 def mainbar_context(request):
-    tags, articles, selecteds= tagfilter(request)
+    articles=Article.objects.all()
+    articles, selecteds, tags= tagfilter(request,articles)
     return{'mainbar_tags':tags,'mainbar_articles':articles,'mainbar_selecteds':selecteds}

@@ -10,7 +10,8 @@ from django.db.models.functions import TruncDate
 # Create your views here.
 def home(request):
     articles=Article.objects.all().order_by('created_day')
-    return render(request,'blog/home.html',{'articles':articles})
+    articles, selecteds,tags= tagfilter(request,articles)
+    return render(request,'blog/home.html',{'articles':articles,'selecteds':selecteds})
 
 @login_required
 def home_edit(request):
@@ -46,18 +47,22 @@ def search(request):
             articles = Article.objects.filter(query).distinct().order_by('created_day')
         else:
             articles = Article.objects.none()
-    return render(request,'blog/search.html',{'articles':articles,'tags':tags,'text_search':text_search,'searched':searched})
+
+    articles, selecteds,tags= tagfilter(request,articles)
+    return render(request,'blog/search.html',{'articles':articles,'tags':tags,'text_search':text_search,'searched':searched,'selecteds':selecteds})
 
 def category_filter(request,category):
     category=Category.objects.get(name=category)
     articles=Article.objects.filter(category=category)
-    return render(request,'blog/category_filter.html',{'category':category,'articles':articles})
+    articles, selecteds,tags= tagfilter(request,articles)
+    return render(request,'blog/category_filter.html',{'category':category,'articles':articles,'selecteds':selecteds})
 
 def tag_filter(request,category,tag):
     category=Category.objects.get(name=category)
     tag=Tag.objects.get(name=tag)
     articles=Article.objects.filter(tag=tag)
-    return render(request,'blog/tag_filter.html',{'category':category,'tag':tag,'articles':articles})
+    articles, selecteds,tags= tagfilter(request,articles)
+    return render(request,'blog/tag_filter.html',{'category':category,'tag':tag,'articles':articles,'selecteds':selecteds})
 
 def archive(request,year,month,day):
     articles = Article.objects.filter(
@@ -65,20 +70,20 @@ def archive(request,year,month,day):
         created_day__month=month,
         created_day__day=day
     )
-    return render(request,'blog/archive.html',{'articles':articles})
+    articles, selecteds,tags= tagfilter(request,articles)
+    return render(request,'blog/archive.html',{'articles':articles,'selecteds':selecteds})
 
-def tagfilter(request):
+def tagfilter(request,articles):
     tags=Tag.objects.all()
-    articles=Article.objects.all().order_by('created_day')
-    
+
     selecteds = request.GET.getlist("tags")
     if selecteds:
-        articles = Article.objects.all()
-    for tag in selecteds:
-        articles = articles.filter(tag__name=tag)
+        for tag in selecteds:
+            articles = articles.filter(tag__name=tag)
 
-    articles = articles.distinct().order_by('created_day')
-    return tags, articles,selecteds
+    articles = articles.distinct().order_by('-created_day')
+    return articles,selecteds,tags
+
 
 class ArticleCreate(LoginRequiredMixin,generic.CreateView):
     model = Article
