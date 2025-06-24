@@ -1,4 +1,7 @@
 {% extends 'blog/home_base.html' %}
+{% load markdownx_extras %}
+{% load custom_filter %}
+{% load excerpt %}
 {% block title%}
   med's blog home
 {% endblock %}
@@ -16,6 +19,24 @@
           placeholder=" 検索ワードを入力 "required>
       <button>検索</button>
     </form>
+{% for article in articles %}
+    <div class="card">
+      <a style = "text-decoration: none; color : black; " href = "/blog/article/{{article.id}}">
+        {% if article.thumbnail %}
+        <img src="{{ article.thumbnail.url }}" alt="Image">
+        {% else %}
+        <img src="/media/blog/images/S.jpg" alt="Image">
+        {% endif %}
+        <h2>{{article.title|highlight_multi:query}}</h2>
+        {% for tag in article.tag.all%}
+        <span>{{tag.name}}</span>
+        {% endfor %}
+        <p>{{article.summary|truncatewords:20}}</p>
+        <p>{{ article.plain_content|slice:":50" |excerpt_with_highlight:query}}</p>
+        <p>{{article.created_day|date:"Y/n/j "}}</p>
+      </a>
+    </div>
+    {% endfor %}
 {% endblock %}
 <!--
 {% load app %}

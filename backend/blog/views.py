@@ -31,25 +31,19 @@ def article(request,pk):
 
 def search(request):
     tags=Tag.objects.all()
-    text_search=""
-    searched=False
     if request.method == "GET":
-        text_search=request.GET.get("q","")
-        text_search = text_search.strip()
-        keywords = text_search.split()
-        query = Q()
-        for word in keywords:
-            query &= (Q(summary__icontains=word) | Q(title__icontains=word))
+        query = request.GET.get('q', '')
+        articles = Article.objects.all()
 
-        searched = bool(text_search)
-
-        if searched:
-            articles = Article.objects.filter(query).distinct().order_by('created_day')
-        else:
-            articles = Article.objects.none()
-
+        if query:
+            keywords = query.strip().split()
+            q_objects = Q()
+            for word in keywords:
+                q_objects |= Q(plain_content__icontains=word) | Q(title__icontains=word)
+            articles = articles.filter(q_objects).distinct()
+            
     articles, selecteds,tags= tagfilter(request,articles)
-    return render(request,'blog/search.html',{'articles':articles,'tags':tags,'text_search':text_search,'searched':searched,'selecteds':selecteds})
+    return render(request,'blog/search.html',{'articles':articles,'tags':tags,'selecteds':selecteds,'query':query})
 
 def category_filter(request,category):
     category=Category.objects.get(name=category)

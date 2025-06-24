@@ -27,7 +27,6 @@
     <!-- 記事一覧や詳細 -->
     <section class="article-list-block" style="flex: 3;">
       {% block content %}
-      {% endblock %}
       {% for article in articles %}
     <div class="card">
       <a style = "text-decoration: none; color : black; " href = "/blog/article/{{article.id}}">
@@ -45,6 +44,7 @@
       </a>
     </div>
     {% endfor %}
+    {% endblock %}
     </section>
 
     <!-- サイドバー -->

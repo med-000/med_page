@@ -1,6 +1,8 @@
 from django.db import models
 from markdownx.models import MarkdownxField
 import uuid
+from markdownx.utils import markdownify
+from django.utils.html import strip_tags    
 
 # Create your models here.
 class Tag(models.Model):
@@ -19,6 +21,13 @@ class Article(models.Model):
     content=MarkdownxField('内容')
     tag=models.ManyToManyField(Tag,related_name='tag')
     category=models.ForeignKey('Category',related_name='article',on_delete=models.SET_NULL,null=True,blank=True)
+    plain_content = models.TextField(editable=False, blank=True)  # ← プレーンテキスト保存用
+
+    def save(self, *args, **kwargs):
+        # Markdown を HTML に変換 → HTMLタグ除去 → プレーンテキストに変換
+        html = markdownify(self.content)
+        self.plain_content = strip_tags(html)
+        super().save(*args, **kwargs)
     def __str__(self):
         return self.title
     

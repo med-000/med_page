@@ -1,0 +1,14 @@
+from django import template
+from markdownx.utils import markdownify
+import re
+
+register = template.Library()
+
+@register.filter
+def markdown_highlight(text, query):
+    html = markdownify(text)  # Markdown -> HTML
+    if not query:
+        return html
+    # 検索語を <mark> で囲む（HTML中）
+    pattern = re.escape(query)
+    return re.sub(f'({pattern})', r'<mark>\1</mark>', html, flags=re.IGNORECASE)
