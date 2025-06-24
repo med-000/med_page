@@ -1,4 +1,8 @@
-{% load app %}
+{% extends 'blog/home_base.html' %}
+{% block title%}
+  med's blog home
+{% endblock %}
+<!--
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,26 +51,39 @@ body {
 </style>
 </head>
 <body>
-
+{% if user.is_authenticated %}
+<p><a href="{% url 'article_create' %}">記事を追加</a></p>
+{% else %}
+{% endif %}
 <div class="header">
   <p><form action="{% url 'search' %}">
       <input type="search" value="{% if searched %} {% else %}{{ text_search }}{% endif %}" 
           name="q" type="text" 
           placeholder=" 検索ワードを入力 "required>
       <button>検索</button>
-    </form></p>
+    </form>
+  </p>
   <h2>med's Blog</h2>
 </div>
 
 <div class="row">
-    <form id="search-form" method="GET" action="{% url 'home'%}">
-      
+  <form id="search-form" method="GET" action="{% url 'home'%}">
         {% for tag in tags%}
         <input type="checkbox" name="tags" value="{{tag.name}}"
         {% if tag.name in selecteds %}checked{% endif %}/>
         <strong>{{tag.name}}</strong>
         {% endfor %}
     </form><br>
+
+  <details>
+    {% for category in categories %}
+    <summary>{{category.name}}<a href = "blog/category/{{category.name}}" style="margin-left: 1em;">🔗</a></summary>
+      {% for tag in category.tag.all%}
+      <a>{{tag.name}}<a href = "blog/category/{{category.name}}/tag/{{tag.name}}" style="margin-left: 1em;">🔗</a></a><br>
+      {% endfor %}
+    </p>
+    {% endfor %}
+  </details>
   <script>
   document.querySelectorAll('#search-form input[type="checkbox"]').forEach(checkbox => {
     checkbox.addEventListener('change', () => {
@@ -79,6 +96,7 @@ body {
     {% for article in articles %}
     <div class="card">
       <a style = "text-decoration: none; color : black; " href = "blog/article/{{article.id}}">
+        <img src="{{ article.thumbnail.url }}" alt="Image">
         <h2>{{article.title}}</h2>
         {% for tag in article.tag.all%}
         <span>{{tag.name}}</span>
@@ -93,3 +111,14 @@ body {
 
 </body>
 </html>
+<h3>アーカイブ</h3>
+<ul>
+  {% for item in archive_dates %}
+    <li>
+      <a href="{% url 'archive' item.date.year item.date.month item.date.day %}">
+        {{ item.date|date:"Y年n月j日" }}（{{ item.count }}件）
+      </a>
+    </li>
+  {% endfor %}
+</ul>
+-->

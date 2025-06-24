@@ -1,0 +1,25 @@
+<style>
+.markdownx {
+    display: flex;
+    gap: 1rem;
+}
+
+.markdownx-editor {
+    min-width: 0 !important;
+    max-width: 100% !important;
+}
+
+.markdownx-preview {
+    flex: 1;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #fafafa;
+}
+</style>
+
+<form action="" method="POST">
+    {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">送信</button>
+            </form>
+            {{ form.media }}

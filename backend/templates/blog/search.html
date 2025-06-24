@@ -1,3 +1,4 @@
+<!--
 {% load app %}
 <!DOCTYPE html>
 <html>
@@ -72,10 +73,22 @@ body {
           placeholder=" 検索ワードを入力 "required>
       <button>検索</button>
     </form>
+    
+  <details>
+    {% for category in categories %}
+    <summary>{{category.name}}<a href = "blog/{{category.name}}" style="margin-left: 1em;">🔗</a></summary>
+      {% for tag in category.tag.all%}
+      <a>{{tag.name}}<a href = "blog/{{category.name}}/{{tag.name}}" style="margin-left: 1em;">🔗</a></a><br>
+      {% endfor %}
+    </p>
+    {% endfor %}
+  </details>
+
   <div class="leftcolumn">
     {% for article in articles %}
     <div class="card">
       <a style = "text-decoration: none; color : black; " href = "/blog/article/{{article.id}}">
+        <img src="{{ article.thumbnail.url }}" alt="Image">
         <h2>{{article.title}}</h2>
         {% for tag in article.tag.all%}
         <span>{{tag.name}}</span>
@@ -90,3 +103,15 @@ body {
 
 </body>
 </html>
+</html>
+<h3>アーカイブ</h3>
+<ul>
+  {% for item in archive_dates %}
+    <li>
+      <a href="{% url 'archive' item.date.year item.date.month item.date.day %}">
+        {{ item.date|date:"Y年n月j日" }}（{{ item.count }}件）
+      </a>
+    </li>
+  {% endfor %}
+</ul>
+-->

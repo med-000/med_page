@@ -1,0 +1,10 @@
+<h3>タグ</h3>
+<ul>
+  {% for tag in sidebar_tags%}
+    <li>
+      <a href="{% url 'tag_filter' tag.category.name tag.name%}">
+        {{ tag.name }}
+      </a>
+    </li>
+  {% endfor %}
+</ul>

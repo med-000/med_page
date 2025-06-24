@@ -1,17 +1,67 @@
+<style>
+/* レイアウト：本文とサイドバー */
+.article-layout {
+  display: flex;
+  gap: 2rem;
+  position: relative;
+}
+
+/* 本文 */
+.main-content {
+  flex: 3;
+  min-width: 0;
+}
+
+/* サイドバー（目次） */
+.toc-sidebar {
+  flex: 1;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: sticky;
+  top: 1rem;
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  font-size: 0.9rem;
+}
+
+/* TOC内のスタイル微調整（必要に応じて） */
+.toc-sidebar ul {
+  list-style: none;
+  padding-left: 0;
+}
+.toc-sidebar li {
+  margin-bottom: 0.5em;
+}
+.toc-sidebar a {
+  text-decoration: none;
+  color: #007bff;
+}
+.toc-sidebar a:hover {
+  text-decoration: underline;
+}
+</style>
 
 {% load app %}
 <!-- 記事の本文 -->
-<a href="/blog">
+<a href="/">
     <p>戻る</p>
 </a>    
-<div class="main-content">
-  <!-- 本文（TOCは含めない） -->
-  {{ article.content|markdown_to_html }}
-</div>
+{% if user.is_authenticated %}
+<p><a href="{% url 'article_edit' article.pk%}">記事を編集</a></p>
+{% else %}
+{% endif %}
+<div class="article-layout">
+  <!-- 本文 -->
+  <div class="main-content">
+    {{ article.content|markdown_to_html }}
+  </div>
 
-<div class="sidebar">
-  <h4>目次</h4>
-  {% extract_toc article.content %}
+  <!-- サイドバー（目次） -->
+  <aside class="toc-sidebar">
+    <h4>目次</h4>
+    {% extract_toc article.content %}
+  </aside>
 </div>
 
 

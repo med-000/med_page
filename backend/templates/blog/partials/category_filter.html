@@ -1,0 +1,10 @@
+<h3>カテゴリー</h3>
+<ul>
+  {% for category in sidebar_categories %}
+    <li>
+      <a href="{% url 'category_filter' category.name %}">
+        {{ category.name }}
+      </a>
+    </li>
+  {% endfor %}
+</ul>

@@ -1,0 +1,7 @@
+<p><form action="{% url 'search' %}">
+      <input type="search" value="{% if searched %} {% else %}{{ text_search }}{% endif %}" 
+          name="q" type="text" 
+          placeholder=" 検索ワードを入力 "required>
+      <button>検索</button>
+    </form>
+  </p>
