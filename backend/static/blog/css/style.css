@@ -11,24 +11,11 @@ html, body {
   align-items:  stretch;
 }
 
-/* 記事エリア */
 .article-list-block {
   flex: 3;
   min-width: 60%;
   padding-right: 0;
   margin-right: 0;  
-}
-
-/* サイドバー */
-.sidebar-block {
-  flex: 1;  
-  max-width: 300px;           /* ← これを追加 */
-  min-height: 100vh;           /* ← 画面の高さに合わせる */
-  background-color: #fff;   /* ← 灰色 */
-  color: #fff;
-  padding: 1rem;
-  margin-left: 0;
-  box-sizing: border-box;
 }
 
 .article-list-block:empty::before {
@@ -40,7 +27,7 @@ html, body {
   font-size: 1.2rem;
 }
 
-
+/*
 .article-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr); 
@@ -178,18 +165,38 @@ html, body {
 
 .progress-bar {
   width: 100%;
-  height: 5px;
-  background-color: #ddd;  /* 薄いグレー */
-  border-radius: 5px;
+  height: 7px;
+  background-color: #e0e0e0;
+  border-radius: 6px;
   overflow: hidden;
-  margin: 5px 0;
+  margin: 6px 0;
 }
 
 .progress {
   height: 100%;
-  background-color: #111;  /* 黒ベース */
-  transition: width 0.4s ease;
-  border-radius: 5px;
+  background-color: #555;
+  text-align: right;
+  padding-right: 4px;
+  line-height: 12px;
+  color: #fff;
+  font-size: 0.7rem;
+  border-radius: 6px;
+  transition: width 0.4s ease-in-out;
+}
+
+.progress-label {
+  padding-right: 5px;
+}
+*/
+.sidebar-block {
+  flex: 1;  
+  max-width: 300px;           
+  min-height: 100vh;           
+  background-color: #fff;   
+  color: #fff;
+  padding: 1rem;
+  margin-left: 0;
+  box-sizing: border-box;
 }
 
 .pagination {
@@ -197,12 +204,10 @@ html, body {
   justify-content: center;
   gap: 0.5em;
   margin-top: 2em;
-  margin-bottom: 3em;  /* ← ここで下に余白を追加 */
+  margin-bottom: 3em;
 }
 
-
-.pagination a,
-.pagination strong {
+.pagination a {
   display: inline-block;
   margin: 0 0.3em;
   padding: 0.4em 0.7em;
@@ -210,29 +215,41 @@ html, body {
   border-radius: 5px;
   text-decoration: none;
   color: #333;
+  transition: background-color 0.2s;
+}
+
+.pagination a:hover {
+  background-color: #eee;
 }
 
 .pagination strong {
+  display: inline-block;
+  margin: 0 0.3em;
+  padding: 0.4em 0.7em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
   background-color: black;
   color: white;
 }
 
-*/*
-
 
 .article-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(2, minmax(280px, 1fr)); /* 2列、幅最小280px */
   gap: 2rem;
   padding: 2rem;
+  justify-content: center; /* 1つでも中央寄せになる */
 }
 
+
 .article-card {
+  position: relative;
   background-color: #fff;
   border-radius: 1rem;
   overflow: hidden;
   box-shadow: 0 2px 10px rgba(0,0,0,0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
 }
 
 .article-card:hover {
@@ -242,18 +259,21 @@ html, body {
 
 .article-image {
   width: 100%;
-  height: 180px;
+  height: 200px;
   object-fit: cover;
 }
 
 .article-card-content {
   padding: 1rem;
+  text-decoration: none;
 }
 
 .article-card h2 {
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   margin-bottom: 0.5rem;
   font-weight: bold;
+  text-decoration: none;
+  color: black;
 }
 
 .article-card p {
@@ -261,6 +281,40 @@ html, body {
   font-size: 0.95rem;
   margin-bottom: 0.8rem;
 }
+
+
+.meta-info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.article-date{
+  color: #555;
+  font-size: 0.95rem;
+  margin-bottom: 0.8rem;
+}
+
+.image-wrapper {
+  position: relative;
+}
+
+.category-label {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 0.75rem;
+  padding: 0.3em 0.6em;
+  border-radius: 6px;
+  z-index: 10;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
 
 .tag-list {
   display: flex;
@@ -270,12 +324,10 @@ html, body {
 }
 
 .tag {
-  background-color: #f3f4f6;
-  border-radius: 0.5rem;
-  padding: 0.2rem 0.6rem;
+  padding: 0.2rem 0.2rem;
   font-size: 0.85rem;
-  color: #333;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  color: #555;
+  text-decoration: underline;
 }
 
 .article-date {
