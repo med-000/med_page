@@ -659,3 +659,69 @@ html, body {
 .search-box button:hover {
   background-color: #333;
 }
+
+.sidebar-block {
+  /* 既存の内容に追加または変更 */
+  margin-right: 1rem;  /* ★右端に余白を追加 */
+}
+
+.sidebar-article-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sidebar-article-card {
+  display: flex;
+  align-items: center;
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.sidebar-article-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 0.75rem;
+}
+
+.sidebar-article-content {
+  flex: 1;
+}
+
+.sidebar-article-content h3 {
+  color:black;
+  font-size: 1rem;
+  margin: 0 0 0.25rem;
+}
+
+.sidebar-article-date {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.ranking-badge {
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  background-color: black;
+  color: white;
+  font-size: 0.75rem;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+

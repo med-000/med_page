@@ -14,7 +14,8 @@ def sidebar_context(request):
         .annotate(count=Count('id'))
         .order_by('-date')
     )
-    return {'sidebar_tags':tags,'sidebar_categories':categories,'sidebar_archive_dates':archive_dates}
+    view_ranking_articles=Article.objects.all().order_by('-view_count')[:5]
+    return {'sidebar_tags':tags,'sidebar_categories':categories,'sidebar_archive_dates':archive_dates,'sidebar_view_ranking_articles':view_ranking_articles}
 
 def mainbar_context(request):
     articles=Article.objects.all()
