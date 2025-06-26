@@ -1,5 +1,5 @@
-<h3>カテゴリー</h3>
-<ul>
+<h3>Category</h3>
+<ul class="footer-category-filter-list">
   {% for category in sidebar_categories %}
     <li>
       <a href="{% url 'category_filter' category.name %}">

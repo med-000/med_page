@@ -1,7 +1,9 @@
-<p><form action="{% url 'search' %}">
-      <input type="search" value="{% if searched %} {% else %}{{ text_search }}{% endif %}" 
-          name="q" type="text" 
-          placeholder=" 検索ワードを入力 "required>
-      <button>検索</button>
-    </form>
-  </p>
+<div class="search-box">
+  <form action="{% url 'search' %}" method="get">
+    <input type="search" name="q"
+      placeholder="検索ワードを入力"
+      value="{% if searched %}{{ searched }}{% else %}{{ text_search }}{% endif %}"
+      required>
+    <button type="submit">検索</button>
+  </form>
+</div>

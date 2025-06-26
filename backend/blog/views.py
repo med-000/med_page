@@ -1,17 +1,19 @@
 from django.shortcuts import render
 from .models import Article,Tag,Comment,Category
-from django.db.models import Q,Count
+from django.db.models import Q,Count,Max,Sum
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.db.models.functions import TruncDate
+from django.core.paginator import Paginator
 
 # Create your views here.
 def home(request):
-    articles=Article.objects.all().order_by('created_day')
+    articles = Article.objects.all().order_by('-created_day')
     articles, selecteds,tags= tagfilter(request,articles)
-    return render(request,'blog/home.html',{'articles':articles,'selecteds':selecteds})
+    
+    return render(request,'blog/home.html',{'articles':articles,'selecteds':selecteds,})
 
 @login_required
 def home_edit(request):
@@ -27,6 +29,9 @@ def article(request,pk):
 
         comment=Comment.objects.create(commentater=commentater, content=content, article=article)
         comment.save()
+
+    article.view_count += 1
+    article.save(update_fields=['view_count'])
     return render(request,'blog/article.html',{'article':article,'comments':comments,'articles':articles})
 
 def search(request):
@@ -56,16 +61,20 @@ def tag_filter(request,category,tag):
     tag=Tag.objects.get(name=tag)
     articles=Article.objects.filter(tag=tag)
     articles, selecteds,tags= tagfilter(request,articles)
-    return render(request,'blog/tag_filter.html',{'category':category,'tag':tag,'articles':articles,'selecteds':selecteds})
+    return render(request,'blog/tag_filter.html',{'category':category,'tag':tag,'articles':articles,'selecteds':selecteds,})
 
 def archive(request,year,month,day):
-    articles = Article.objects.filter(
+    articles_all = Article.objects.filter(
         created_day__year=year,
         created_day__month=month,
         created_day__day=day
     )
-    articles, selecteds,tags= tagfilter(request,articles)
-    return render(request,'blog/archive.html',{'articles':articles,'selecteds':selecteds})
+    articles, selecteds,tags= tagfilter(request,articles_all)
+    paginator = Paginator(articles_all, 6)  # 1ページに6件表示（お好みで変更可）
+    page_number = request.GET.get('page')
+    articles = paginator.get_page(page_number)
+    total_views = Article.objects.aggregate(Sum('view_count'))['view_count__sum'] or 1
+    return render(request,'blog/archive.html',{'articles':articles,'selecteds':selecteds,'total_views':total_views})
 
 def tagfilter(request,articles):
     tags=Tag.objects.all()

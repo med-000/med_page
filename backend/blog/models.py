@@ -21,6 +21,7 @@ class Article(models.Model):
     content=MarkdownxField('内容')
     tag=models.ManyToManyField(Tag,related_name='tag')
     category=models.ForeignKey('Category',related_name='article',on_delete=models.SET_NULL,null=True,blank=True)
+    view_count = models.IntegerField(default=0)
     plain_content = models.TextField(editable=False, blank=True)  # ← プレーンテキスト保存用
 
     def save(self, *args, **kwargs):

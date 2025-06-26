@@ -1,27 +1,18 @@
-<form id="search-form" method="GET" action="">
-        {% if request.GET.q %}
-        <input type="hidden" name="q" value="{{ request.GET.q }}">
-        {% endif %}
-        {% for tag in mainbar_tags%}
-        <input type="checkbox" name="tags" value="{{tag.name}}"
-        {% if tag.name in mainbar_selecteds %}checked{% endif %}/>
-        <strong>{{tag.name}}</strong>
-        {% endfor %}
-    </form><br>
+{% load static %}
+<ul class="nav-menu">
 
-{% for category in sidebar_categories %}
-  <details><br>
-    <summary>{{category.name}}<a href = "/blog/category/{{category.name}}" style="margin-left: 1em;">🔗</a></summary>
-      {% for tag in category.tag.all%}
-      <a>{{tag.name}}<a href = "/blog/category/{{category.name}}/tag/{{tag.name}}" style="margin-left: 1em;">🔗</a></a><br>
-      {% endfor %}
-    </p>
-  </details>
-{% endfor %}
-  <script>
-  document.querySelectorAll('#search-form input[type="checkbox"]').forEach(checkbox => {
-    checkbox.addEventListener('change', () => {
-      document.getElementById('search-form').submit();
-    });
-  });
-</script>
+  {% for category in sidebar_categories %}
+    <li class="nav-item dropdown">
+      <a href="{% url 'category_filter' category.name %}">{{ category.name }}</a>
+      {% if category.tag.all %}
+        <ul class="dropdown-menu">
+          {% for tag in category.tag.all %}
+            <li>
+              <a href="/blog/category/{{ category.name }}/tag/{{ tag.name }}">{{ tag.name }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>

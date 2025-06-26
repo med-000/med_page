@@ -1,0 +1,26 @@
+<form id="search-form" method="GET" action="">
+  {% if request.GET.q %}
+  <input type="hidden" name="q" value="{{ request.GET.q }}">
+  {% endif %}
+
+  {% for tag in mainbar_tags %}
+    <input 
+      type="checkbox" 
+      name="tags" 
+      value="{{ tag.name }}" 
+      id="tag-{{ forloop.counter }}" 
+      {% if tag.name in mainbar_selecteds %}checked{% endif %}
+    />
+    <label for="tag-{{ forloop.counter }}">
+      {{ tag.name }}
+    </label>
+  {% endfor %}
+</form>
+<br>
+    <script>
+  document.querySelectorAll('#search-form input[type="checkbox"]').forEach(checkbox => {
+    checkbox.addEventListener('change', () => {
+      document.getElementById('search-form').submit();
+    });
+  });
+</script>

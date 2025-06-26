@@ -1,5 +1,7 @@
 {% load static %}
 {% load app %}
+{% load math_filter %}
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -8,42 +10,101 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- CSS読み込み（必要に応じて外部CSSやCDN） -->
   <link rel="stylesheet" href="{% static 'blog/css/style.css' %}">
+
 </head>
 <body>
   <!-- ヘッダー -->
   <header class="site-header">
     <div class="title-block">
-      <h1><a href="{% url 'home' %}">My Blog</a></h1>
-    </div>
+      <h1><a href="{% url 'home' %}">med's blog</a></h1>
+    </div><br>
+    <nav class="category-block">
+    {% include 'blog/partials/category_nav.html' %}
+  </nav>
   </header>
 
   <!-- ナビゲーション（カテゴリなど） -->
-  <nav class="category-block">
-    {% include 'blog/partials/category_nav.html' %}
-  </nav>
+   
 
   <!-- メインコンテンツエリア -->
-  <main class="main-content-area" style="display: flex; gap: 2rem;">
+  <main class="main-content-area" >
     <!-- 記事一覧や詳細 -->
-    <section class="article-list-block" style="flex: 3;">
+    <section class="article-list-block">
       {% block content %}
-      {% for article in articles %}
-    <div class="card">
-      <a style = "text-decoration: none; color : black; " href = "/blog/article/{{article.id}}">
-        {% if article.thumbnail %}
-        <img src="{{ article.thumbnail.url }}" alt="Image">
-        {% else %}
-        <img src="/media/blog/images/S.jpg" alt="Image">
-        {% endif %}
-        <h2>{{article.title}}</h2>
-        {% for tag in article.tag.all%}
-        <span>{{tag.name}}</span>
-        {% endfor %}
-        <p>{{article.summary|truncatewords:20}}</p>
-        <p>{{article.created_day|date:"Y/n/j "}}</p>
+      <div class="article-grid">
+
+  {% if articles %}
+  {% for article in articles %}
+    <div class="article-card" href="{% url 'article' article.id%}">
+      <a href="{% url 'article' article.id%}">
+      {% if article.thumbnail %}
+        <img src="{{ article.thumbnail.url }}" alt="{{ article.title }}" class="article-image" />
       </a>
+      {% else %}
+      <a href="{% url 'article' article.id%}">
+        <img src="/media/blog/images/S.jpg" alt="{{ article.title }}" class="article-image" />
+      </a>
+      {% endif %}
+      <div class="article-card-content">
+        <h2>
+        <a href="{% url 'article' article.id%}">
+        {{ article.title }}
+        </a>
+        </h2>
+        <p>{{ article.summary }}</p>
+        <div class="player-controls">
+            <div class="progress-bar">
+            </div>
+            <a href="{% url 'article' article.id%}">
+                <button class="play-button">▶</button>
+            </a>
+        </div>
+
+        <div class="tag-list" >
+          {% for tag in article.tag.all %}
+            <a class="tag" href="{% url 'tag_filter' tag.category.name tag.name%}">{{ tag.name }}</a>
+          {% endfor %}
+        </div>
+
+        <div class="article-date">
+          {{ article.created_day|date:"Y/m/d" }}
+        </div>
+      </div>
     </div>
+  {% endfor %}
+  
+</div>
+
+  {% else %}
+    <p>該当する記事がありません</p>
+  {% endif %}
+
+  <div class="pagination">
+  {% if articles.has_previous %}
+    <a href="?page={{ articles.previous_page_number }}">« 前へ</a>
+  {% endif %}
+
+  {% if articles.paginator.num_pages > 1 %}
+  <div class="pagination">
+    {% if articles.has_previous %}
+      <a href="?page={{ articles.previous_page_number }}">« 前へ</a>
+    {% endif %}
+
+    {% for num in articles.paginator.page_range %}
+      {% if articles.number == num %}
+        <strong>{{ num }}</strong>
+      {% else %}
+        <a href="?page={{ num }}">{{ num }}</a>
+      {% endif %}
     {% endfor %}
+
+    {% if articles.has_next %}
+      <a href="?page={{ articles.next_page_number }}">次へ »</a>
+    {% endif %}
+  </div>
+{% endif %}
+</div>
+
     {% endblock %}
     </section>
 
@@ -52,21 +113,27 @@
       <div class="search-block">
         {% include 'blog/partials/search_form.html' %}
       </div>
-      <div class="archive-block">
-        {% include 'blog/partials/archive_list.html' %}
-      </div>
-      <div class="sidebar-category-block">
-        {% include 'blog/partials/category_filter.html' %}
-      </div>
-      <div class="tag-filter-block">
-        {% include 'blog/partials/tag_filter.html' %}
+      <div class="tagfilter-block">
+        {% include 'blog/partials/tagfilter_form.html' %}
       </div>
     </aside>
   </main>
 
   <!-- フッター -->
   <footer class="site-footer">
-    <p>&copy; 2025 My Blog</p>
+      <div class="archive-block">
+        {% include 'blog/partials/archive_list.html' %}
+      </div>
+      <div class="sidebar-category-block">
+        {% include 'blog/partials/category_filter.html' %}
+      </div>
+      <div class="about-block">
+        {% include 'blog/partials/about.html' %}
+      </div>
+      <div class="tag-filter-block">
+        {% include 'blog/partials/follow_me.html' %}
+      </div>
+    <p>&copy; 2025 LmedR</p>
   </footer>
 
   <!-- 必要であれば JS 読み込み -->
