@@ -27,11 +27,12 @@
    
 
   <!-- メインコンテンツエリア -->
-   {% block form%}
-   {% endblock %}
   <main class="main-content-area" >
+  
     <!-- 記事一覧や詳細 -->
     <section class="article-list-block">
+      {% block form%}
+   {% endblock %}
       {% block content %}
       <div class="article-grid">
 
@@ -50,7 +51,7 @@
         <h2>
         {{ article.title }}
         </h2>
-        <p>{{ article.summary }}</p>
+        <p>{{ article.plain_content|slice:":50"}}</p>
         <div class="player-controls">
             <div class="progress-bar" >
                 <div class="progress" style="width: {{ article.view_count|div:total_views|mul:100|floatformat:2 }}%;"></div>
@@ -106,6 +107,7 @@
         {% include 'blog/partials/search_form.html' %}
       </div>
       <div class="tagfilter-block">
+        <p>タグで絞り込み</p>
         {% include 'blog/partials/tagfilter_form.html' %}
       </div>
     </aside>

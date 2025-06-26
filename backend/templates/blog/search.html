@@ -2,41 +2,91 @@
 {% load markdownx_extras %}
 {% load custom_filter %}
 {% load excerpt %}
+{% load math_filter %}
+{% load static %}
 {% block title%}
   med's blog home
 {% endblock %}
-{% block content %}
+{% block form %}
 {% if searched %}
   <h2>検索結果</h2>
   {% if not articles%}
     <p>該当する記事はありません。</p>
   {% endif %}
 {% endif %}
-
+<div class="word-search-form">
     <form>
       <input type="search" value="{{request.GET.q|default:''}}" 
           name="q" type="text" 
           placeholder=" 検索ワードを入力 "required>
       <button>検索</button>
-    </form>
-{% for article in articles %}
-    <div class="card">
-      <a style = "text-decoration: none; color : black; " href = "/blog/article/{{article.id}}">
-        {% if article.thumbnail %}
-        <img src="{{ article.thumbnail.url }}" alt="Image">
-        {% else %}
-        <img src="/media/blog/images/S.jpg" alt="Image">
-        {% endif %}
-        <h2>{{article.title|highlight_multi:query}}</h2>
-        {% for tag in article.tag.all%}
-        <span>{{tag.name}}</span>
-        {% endfor %}
-        <p>{{article.summary|truncatewords:20}}</p>
+    </form><br>
+    <p class="result-count">{{ articles|length }} 件見つかりました。</p>
+</div>
+{% endblock %}
+{% block content %}
+
+<div class="article-grid">
+
+  {% if articles %}
+  {% for article in articles %}
+    <a class="article-card" href="{% url 'article' article.id%}">
+      {% if article.thumbnail %}
+        <img src="{{ article.thumbnail.url }}" alt="{{ article.title }}" class="article-image" />
+      {% else %}
+        <img src="/media/blog/images/S.jpg" alt="{{ article.title }}" class="article-image" />
+      {% endif %}
+      <div class="category-label">
+      {{ article.category.name }}
+  </div>
+      <div class="article-card-content">
+        <h2>
+        {{article.title|highlight_multi:query}}
+        </h2>
         <p>{{ article.plain_content|slice:":50" |excerpt_with_highlight:query}}</p>
-        <p>{{article.created_day|date:"Y/n/j "}}</p>
-      </a>
-    </div>
+        <div class="player-controls">
+            <div class="progress-bar" >
+                <div class="progress" style="width: {{ article.view_count|div:total_views|mul:100|floatformat:2 }}%;"></div>
+            </div>
+        </div>
+
+  <div class="tag-list">
+    {% for tag in article.tag.all %}
+      <span class="tag">#{{ tag.name }}</span>
     {% endfor %}
+  </div>
+
+        <div class="article-date">
+          {{ article.created_day|date:"Y/m/d" }}
+        </div>
+      </div>
+    </a>
+  {% endfor %}
+  
+</div>
+
+  {% else %}
+    <p>該当する記事がありません</p>
+  {% endif %}
+
+  <div class="pagination">
+  {% if articles.has_previous %}
+    <a href="?page={{ articles.previous_page_number }}">« 前へ</a>
+  {% endif %}
+
+  {% for num in articles.paginator.page_range %}
+    {% if articles.number == num %}
+      <strong>{{ num }}</strong>
+    {% else %}
+      <a href="?page={{ num }}">{{ num }}</a>
+    {% endif %}
+  {% endfor %}
+
+  {% if articles.has_next %}
+    <a href="?page={{ articles.next_page_number }}">次へ »</a>
+  {% endif %}
+</div>
+
 {% endblock %}
 <!--
 {% load app %}

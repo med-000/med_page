@@ -199,6 +199,11 @@ html, body {
   box-sizing: border-box;
 }
 
+.sidebar-block p{
+  font-weight: bold;
+  color: black;
+}
+
 .pagination {
   display: flex;
   justify-content: center;
@@ -427,13 +432,73 @@ html, body {
 
 
 /*ここからタグ絞り込み*/
+.word-search-form {
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  margin: 2rem auto;
+  max-width: 500px;
+  padding: 0 1rem;
+}
+
+.word-search-form form {
+  display: flex;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 0; /* ← 四角に */
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.word-search-form input[type="search"] {
+  flex-grow: 1;
+  padding: 0.6rem 1rem;
+  border: none;
+  font-size: 1rem;
+  outline: none;
+  background: transparent;
+  border-right: 1px solid #ccc; /* 入力とボタンの仕切り */
+}
+
+.word-search-form button {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 0; /* ← 四角に */
+  transition: background-color 0.2s ease;
+}
+
+.word-search-form button:hover {
+  background-color: #333;
+}
+
+.result-count {
+  align-items: center;
+  font-size: 1rem;
+  color: #444;
+  margin: 0.3rem 0 0 0.3rem;
+}
+
+
 #search-form {
-  margin-top: 2rem; 
+  margin-top: 0;
+  margin-bottom: 1rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-bottom: 1rem;
+
+  border: 1px solid #ddd;    /* 枠線 */
+  border-radius: 4px;        /* 角丸 */
+  background-color: #fff;    /* 中の背景白 */
+  padding: 0.5rem;           /* 中の余白（お好みで調整可） */
+  box-sizing: border-box; 
+   margin-right: 1rem;   /* パディング込みのサイズ指定にする */
 }
+
 
 #search-form input[type="checkbox"] {
   display: none; /* チェックボックスは非表示に */
@@ -457,6 +522,7 @@ html, body {
   color: #fff;
   border-color: #e8d8f9;
 }
+
 /* ここからフッター*/
 .site-footer {
   display: flex;
@@ -557,7 +623,7 @@ html, body {
 }
 
 .search-box {
-  background-color: #fff;
+  background-color: #ffffff;
   border: 1px solid #ddd;
   padding: 1rem;
   border-radius: 8px;
