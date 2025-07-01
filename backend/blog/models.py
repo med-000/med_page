@@ -22,10 +22,9 @@ class Article(models.Model):
     tag=models.ManyToManyField(Tag,related_name='tag')
     category=models.ForeignKey('Category',related_name='article',on_delete=models.SET_NULL,null=True,blank=True)
     view_count = models.IntegerField(default=0)
-    plain_content = models.TextField(editable=False, blank=True)  # ← プレーンテキスト保存用
+    plain_content = models.TextField(editable=False, blank=True)  
 
     def save(self, *args, **kwargs):
-        # Markdown を HTML に変換 → HTMLタグ除去 → プレーンテキストに変換
         html = markdownify(self.content)
         self.plain_content = strip_tags(html)
         super().save(*args, **kwargs)

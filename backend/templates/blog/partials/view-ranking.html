@@ -1,15 +1,29 @@
 <div class="sidebar-article-list">
   {% for article in sidebar_view_ranking_articles %}
-    <a class="sidebar-article-card" href="{% url 'article' article.id %}">
-      <div class="ranking-badge">{{ forloop.counter }}</div>
+    <a href="{% url 'article' article.id %}" class="sidebar-article-card">
+      
+      <div class="ranking-badge">
+        {{ forloop.counter }}
+      </div>
+
       {% if article.thumbnail %}
-        <img src="{{ article.thumbnail.url }}" alt="{{ article.title }}" class="sidebar-article-image" />
+        <img 
+          src="{{ article.thumbnail.url }}" 
+          alt="{{ article.title }}" 
+          class="sidebar-article-image"
+        >
       {% else %}
-        <img src="/media/blog/images/S.jpg" alt="{{ article.title }}" class="sidebar-article-image" />
+        <img 
+          src="/media/blog/images/S.jpg" 
+          alt="{{ article.title }}" 
+          class="sidebar-article-image"
+        >
       {% endif %}
+
       <div class="sidebar-article-content">
         <h3>{{ article.title|truncatechars:20 }}</h3>
       </div>
+
     </a>
   {% endfor %}
 </div>

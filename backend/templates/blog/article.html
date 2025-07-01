@@ -1,51 +1,66 @@
 {% load app %}
 {% load static %}
+
+<!-- ヘッダー -->
 <header class="site-header">
-    <div class="title-block">
-      <h1><a href="{% url 'home' %}">med's blog</a></h1>
-    </div><br>
-    <nav class="category-block">
+  <div class="title-block">
+    <h1><a href="{% url 'home' %}">med's blog</a></h1>
+  </div>
+  <br>
+  <nav class="category-block">
     {% include 'blog/partials/category_nav.html' %}
   </nav>
-  </header>
-<!-- 記事の本文 -->
- <link rel="stylesheet" href="{% static 'blog/css/style.css' %}">
+</header>
+
+<!-- CSS -->
+<link rel="stylesheet" href="{% static 'blog/css/style.css' %}">
+
+<!-- メインレイアウト -->
 <div class="article-layout">
+  <!-- 記事本文 -->
   <div class="main-content markdown-content">
     <div class="main-content-title">
-    <h1>{{article.title}}</h1>
+      <h1>{{ article.title }}</h1>
     </div>
-    作成日:{{article.created_day|date:"Y/m/d" }} 更新日:{{article.updated_day|date:"Y/m/d" }}<br>
+
+    <p>
+      作成日: {{ article.created_day|date:"Y/m/d" }}　
+      更新日: {{ article.updated_day|date:"Y/m/d" }}
+    </p>
+
     <div class="category-tag">
-    <a class="label" href="{% url 'category_filter' article.category.name %}" >
-      /{{article.category}}
-    </a>
-      {% for tag in article.tag.all %}
-      <a class="label" href="/blog/category/{{ article.category.name }}/tag/{{ tag.name }}">
-      #{{tag}}
+      <a class="label" href="{% url 'category_filter' article.category.name %}">
+        /{{ article.category }}
       </a>
+      {% for tag in article.tag.all %}
+        <a class="label" href="/blog/category/{{ article.category.name }}/tag/{{ tag.name }}">
+          #{{ tag }}
+        </a>
       {% endfor %}
-      </div>
+    </div>
+
     {% if article.thumbnail %}
-        <img src="{{ article.thumbnail.url }}" alt="{{ article.title }}" class="article-main-image" />
-      {% else %}
-        <img src="/media/blog/images/S.jpg" alt="{{ article.title }}" class="article-main-image" />
-      {% endif %}
+      <img src="{{ article.thumbnail.url }}" alt="{{ article.title }}" class="article-main-image">
+    {% else %}
+      <img src="/media/blog/images/S.jpg" alt="{{ article.title }}" class="article-main-image">
+    {% endif %}
+
     <h2>目次</h2>
     <div class="toc">
-    {% extract_toc article.content %}
+      {% extract_toc article.content %}
     </div>
+
     {{ article.content|markdown_to_html|safe }}
   </div>
+
+  <!-- サイドバー目次 -->
   <aside class="toc-sidebar">
     <h4>目次</h4>
     {% extract_toc article.content %}
   </aside>
 </div>
 
-
-
-
+<!-- コメントセクション -->
 <div class="comment-section">
   <h2>コメント</h2>
   {% for comment in comments %}
@@ -70,6 +85,7 @@
   </form>
 </div>
 
+<!-- 関連記事 -->
 <div class="more-articles">
   <h2>関連記事</h2>
   <div class="article-grid">
@@ -84,6 +100,7 @@
             {% endif %}
             <div class="category-label">{{ article.category }}</div>
           </div>
+
           <div class="article-card-content">
             <h2>{{ article.title }}</h2>
             <p>{{ article.summary|truncatewords:20 }}</p>
@@ -99,33 +116,29 @@
     {% endfor %}
   </div>
 </div>
+
 <!-- トップに戻るボタン -->
-<button id="back-to-top" title="ページトップへ">▲
-</button>
+<button id="back-to-top" title="ページトップへ">▲</button>
 
+<!-- 戻るリンク -->
+<a href="/"><p>戻る</p></a>
 
-<a href="/">
-    <p>戻る</p>
-</a>    
+<!-- 認証チェック（編集リンク） -->
 {% if user.is_authenticated %}
-<p><a href="{% url 'article_edit' article.pk%}">記事を編集</a></p>
-{% else %}
+  <p><a href="{% url 'article_edit' article.pk %}">記事を編集</a></p>
 {% endif %}
-<!-- 変更後（黒背景に合うテーマ） -->
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/tomorrow-night.min.css">
 
+<!-- ハイライト用テーマ（ダーク） -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/tomorrow-night.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 
+<!-- トップへスクロールボタンのスクリプト -->
 <script>
   const backToTopBtn = document.getElementById("back-to-top");
 
   window.addEventListener("scroll", () => {
-    if (window.scrollY > 300) {
-      backToTopBtn.style.display = "block";
-    } else {
-      backToTopBtn.style.display = "none";
-    }
+    backToTopBtn.style.display = window.scrollY > 300 ? "block" : "none";
   });
 
   backToTopBtn.addEventListener("click", () => {

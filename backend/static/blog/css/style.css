@@ -28,175 +28,6 @@ html, body {
   font-size: 1.2rem;
 }
 
-/*
-body {
-  background-color: #ddd;
-  color: #222; 
-  font-family: "Helvetica Neue", "Arial", sans-serif;
-  line-height: 1.8;
-  margin: 0;
-  padding: 0;
-}
-.article-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); 
-  overflow-x: auto;
-  padding: 2rem 1rem;
-  gap: 1.5rem;
-  background-color: #fff;
-  scroll-snap-type: x mandatory;
-}
-
-
-.article-card {
-  flex: 0 0 220px;
-  background-color: #efefef;
-  border-radius: 16px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  scroll-snap-align: start;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1rem;
-  transition: transform 0.2s ease;
-  text-decoration: none;   
-  color: inherit; 
-}
-
-.article-card:hover {
-  transform: translateY(-4px);
-}
-
-
-
-.article-image {
-  width: 200px;             
-  height: 200px;            
-  object-fit: cover;
-  border-radius: 12px;
-  margin-bottom: 1rem;
-  border: 4px solid #fff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-.article-card span {
-  text-decoration: underline;
-  text-underline-offset: 3px; 
-}
-
-
-
-.article-card-content {
-  text-align: center;
-  width: 100%;
-}
-
-.article-card-content h2 a{
-  font-size: 1.0rem;
-  color: #333;
-  text-decoration: none;
-}
-
-.article-card-content p {
-  font-size: 0.85rem;
-  color: #666;
-  margin-bottom: 0.5rem;
-}
-
-
-.tag-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.3rem;
-  margin-top: 0.8rem;  
-  margin-bottom: 0;    
-}
-
-.tag {
-  background-color: transparent;  
-  color: #888888;                 
-  font-size: 0.7rem;
-  padding: 0;                    
-  border-radius: 0;              
-}
-
-
-.article-date {
-  font-size: 0.75rem;
-  color: #aaa;
-}
-
-.player-controls {
-  margin-top: 0.8rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.4rem;
-  width: 100%;
-}
-
-.play-button {
-  position: relative;
-  background: none;
-  border: none;
-  color: #555;
-  font-size: 2.0rem;
-  cursor: pointer;
-  padding: 0;
-}
-
-
-.play-button::after {
-  content: '見る'; 
-  position: absolute;
-  bottom: 125%; 
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #333;
-  color: #fff;
-  padding: 4px 8px;
-  border-radius: 4px;
-  white-space: nowrap;
-  font-size: 0.75rem;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s ease;
-  z-index: 10;
-}
-
-
-.play-button:hover::after {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-
-.progress-bar {
-  width: 100%;
-  height: 7px;
-  background-color: #e0e0e0;
-  border-radius: 6px;
-  overflow: hidden;
-  margin: 6px 0;
-}
-
-.progress {
-  height: 100%;
-  background-color: #555;
-  text-align: right;
-  padding-right: 4px;
-  line-height: 12px;
-  color: #fff;
-  font-size: 0.7rem;
-  border-radius: 6px;
-  transition: width 0.4s ease-in-out;
-}
-
-.progress-label {
-  padding-right: 5px;
-}
-*/
 .sidebar-block {
   flex: 1;  
   max-width: 300px;           
@@ -246,13 +77,12 @@ body {
   color: white;
 }
 
-
 .article-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(280px, 1fr)); /* 2列、幅最小280px */
+  grid-template-columns: repeat(2, minmax(280px, 1fr)); 
   gap: 2rem;
   padding: 2rem;
-  justify-content: center; /* 1つでも中央寄せになる */
+  justify-content: center;
 }
 
 
@@ -349,19 +179,16 @@ body {
   color: #888;
 }
 
-
-/*ここからはcategory_nav.html*/
 .site-header {
   display: flex;
-  align-items: center;       /* タイトルとナビを上下中央揃え */
-  justify-content: space-between; /* 左右に分ける */
+  align-items: center;       
+  justify-content: space-between; 
   padding: 0.75rem 1rem; 
   background: #000000; 
   font-family: 'Helvetica', 'Arial', sans-serif; 
   font-weight: bold        
 }
 
-/* タイトルの見た目調整 */
 .title-block h1 a {
   margin: 0;
   font-size: 2.0  rem;
@@ -374,15 +201,11 @@ body {
   font-size: 2.0rem;
 }
 
-/* ナビの親ブロックがflexなので幅を調整 */
 .category-block {
-  /* ナビ全体が長すぎるとタイトルが押されるのでmax-width等で調整可 */
   max-width: 70%;
   font-size: 1.0rem;
 }
 
-
-/* 既存のナビメニューはそのまま使う */
 .nav-menu {
   list-style: none;
   display: flex;
@@ -392,7 +215,6 @@ body {
   background:  #000000;
 }
 
-/* 以下、いただいた既存スタイルはそのまま */
 .nav-item {
   position: relative;
 }
@@ -439,8 +261,6 @@ body {
   display: block;
 }
 
-
-/*ここからタグ絞り込み*/
 .word-search-form {
   flex-direction: column;
   display: flex;
@@ -454,7 +274,7 @@ body {
   display: flex;
   width: 100%;
   border: 1px solid #ccc;
-  border-radius: 0; /* ← 四角に */
+  border-radius: 0; 
   overflow: hidden;
   background-color: #fff;
 }
@@ -466,7 +286,7 @@ body {
   font-size: 1rem;
   outline: none;
   background: transparent;
-  border-right: 1px solid #ccc; /* 入力とボタンの仕切り */
+  border-right: 1px solid #ccc;
 }
 
 .word-search-form button {
@@ -477,7 +297,7 @@ body {
   font-weight: bold;
   font-size: 1rem;
   cursor: pointer;
-  border-radius: 0; /* ← 四角に */
+  border-radius: 0; 
   transition: background-color 0.2s ease;
 }
 
@@ -500,17 +320,16 @@ body {
   flex-wrap: wrap;
   gap: 0.5rem;
 
-  border: 1px solid #ddd;    /* 枠線 */
-  border-radius: 4px;        /* 角丸 */
-  background-color: #fff;    /* 中の背景白 */
-  padding: 0.5rem;           /* 中の余白（お好みで調整可） */
+  border: 1px solid #ddd;   
+  border-radius: 4px;        
+  background-color: #fff;    
+  padding: 0.5rem;           
   box-sizing: border-box; 
-   margin-right: 1rem;   /* パディング込みのサイズ指定にする */
+   margin-right: 1rem;   
 }
 
-
 #search-form input[type="checkbox"] {
-  display: none; /* チェックボックスは非表示に */
+  display: none; 
 }
 
 #search-form label {
@@ -532,22 +351,20 @@ body {
   border-color: #e8d8f9;
 }
 
-/* ここからフッター*/
 .site-footer {
   display: flex;
-  justify-content: space-between; /* ブロックを横に広げて配置 */
-  gap: 2rem; /* ブロック間の余白 */
+  justify-content: space-between; 
+  gap: 2rem; 
   padding: 2rem;
-  background-color: #f5f5f5; /* お好みで */
-  flex-wrap: wrap; /* 狭い画面で折り返す */
+  background-color: #f5f5f5; 
+  flex-wrap: wrap; 
 }
 
 .site-footer > div {
-  flex: 1; /* 各ブロックが均等に広がる */
-  min-width: 200px; /* 折り返し時の最小幅 */
+  flex: 1;
+  min-width: 200px; 
 }
 
-/* コピーライトの位置調整 */
 .site-footer p {
   width: 100%;
   text-align: center;
@@ -556,12 +373,10 @@ body {
   color: #666;
 }
 
-/*フッター*/
-/* スクロール可能なアーカイブエリア */
 .archive-scroll-wrapper {
-  max-height: 200px; /* 必要に応じて調整 */
+  max-height: 200px; 
   overflow-y: auto;
-  padding-right: 5px;  /* スクロールバーのスペース確保 */
+  padding-right: 5px; 
   border: 1px solid #ccc;
   border-radius: 5px;
 }
@@ -646,12 +461,11 @@ body {
   gap: 0.5rem;
 }
 
-
 .search-box input[type="search"] {
-  flex: 1 1 auto; /* 幅を親に合わせて伸縮 */
-  max-width: 100%; /* 親を超えない */
+  flex: 1 1 auto; 
+  max-width: 100%; 
   box-sizing: border-box;
-  min-width: 0; /* ← これ超重要！flex環境ではみ出し防止 */
+  min-width: 0; 
 }
 
 .search-box button {
@@ -670,8 +484,7 @@ body {
 }
 
 .sidebar-block {
-  /* 既存の内容に追加または変更 */
-  margin-right: 1rem;  /* ★右端に余白を追加 */
+  margin-right: 1rem;  
 }
 
 .sidebar-article-list {
@@ -734,10 +547,6 @@ body {
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-
-
-
-/* カテゴリは少し目立たせたいなら */
 .category-label {
   background-color: #797979;
   color: white;
@@ -747,8 +556,6 @@ body {
 .category-label:hover {
   background-color: #747474;
 }
-
-
 
 .article-layout {
   display: flex;
@@ -760,42 +567,40 @@ body {
    align-items: flex-start;
 }
 
-/* 本文部分 */
 .main-content {
   flex: 0 1 800px;
   min-width: 0;
-  background-color: #fff; /* 記事本文は白背景 */
+  background-color: #fff; 
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* 軽めの影 */
-  color: #333; /* 文字は濃いグレー */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); 
+  color: #333; 
 }
 
-/* 記事スタイル */
 .main-content h1,
 .main-content h2,
 .main-content h3 {
   font-weight: bold;
   margin-top: 2rem;
   margin-bottom: 1rem;
-  border-bottom: 2px solid #ccc; /* 柔らかいグレー線 */
+  border-bottom: 2px solid #ccc; 
   padding-bottom: 0.3rem;
-  color: #111; /* 見出しは濃い目 */
+  color: #111; 
 }
 
 .main-content p {
   margin: 1rem 0;
   font-size: 1.05rem;
-  color: #444; /* 段落テキストは濃いグレー */
+  color: #444; 
 }
 
 .main-content a {
-  color: #3b82f6; /* 爽やかなブルー */
+  color: #3b82f6;
   text-decoration: underline;
 }
 
 .main-content blockquote {
-  background-color: #f0f0f0; /* 薄いグレー */
+  background-color: #f0f0f0;
   border-left: 5px solid #bbb;
   padding: 1rem;
   margin: 1.5rem 0;
@@ -804,10 +609,9 @@ body {
   color: #666;
 }
 
-/* コードブロック */
 .main-content pre {
-  background-color: #1e1e1e; /* 黒に近いダークグレー */
-  color: #ddd; /* 明るい文字色 */
+  background-color: #1e1e1e;
+  color: #ddd; 
   padding: 1rem;
   border-radius: 8px;
   overflow-x: auto;
@@ -818,27 +622,23 @@ body {
 }
 
 .main-content code {
-  background-color: #1e1e1e; /* 少し明るめの黒寄りグレー */
-  color: #eee; /* 明るい文字 */
+  background-color: #1e1e1e;
+  color: #eee; 
   padding: 0.2em 0.4em;
   border-radius: 4px;
   font-family: "Fira Code", monospace;
   font-size: 0.95rem;
 }
 
-
-/* 画像 */
 .main-content img {
   max-width: 100%;
   border-radius: 8px;
   margin: 1rem 0;
 }
 
-/* 目次サイドバー */
-
 .toc-sidebar {
   position: sticky;
-  top: 80px; /* ヘッダー分の高さ調整 */
+  top: 80px; 
   align-self: flex-start;
   height: fit-content;
   max-height: calc(100vh - 100px);
@@ -849,15 +649,12 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-
-
 .toc-sidebar h4 {
   font-size: 1.1rem;
   margin-bottom: 1rem;
   color: #111;
 }
 
-/* 階層構造に合わせたインデント */
 .toc-sidebar ul ul {
   padding-left: 1rem;
 }
@@ -870,7 +667,6 @@ body {
   padding-left: 3rem;
 }
 
-/* リスト項目のマージンも調整可能 */
 .toc-sidebar li {
   margin-bottom: 0.4rem;
 }
@@ -888,19 +684,18 @@ body {
 
 .article-main-image {
   width: 100%;
-  aspect-ratio: 16/ 7; /* 縦9:横16 */
+  aspect-ratio: 16/ 7;
   object-fit: cover;
 }
 .main-content-title h1 {
-  font-size: 3rem;        /* 大きな文字サイズ */
+  font-size: 3rem;
   font-weight: bold;
   color: #111;
   margin-top: 0rem;
   margin-bottom: 1rem;
-  border-bottom: none;    /* 下線を消す */
-  padding-bottom: 0;      /* 下の余白もなし */
+  border-bottom: none;
+  padding-bottom: 0;
   line-height: 1.2;
-  /* 必要なら文字間やフォントファミリも調整 */
 }
 
 .label {
@@ -1078,7 +873,7 @@ body {
   position: fixed;
   bottom: 30px;
   right: 30px;
-  display: none; /* 初期は非表示 */
+  display: none; 
   background-color: #000;
   color: #fff;
   border: none;
@@ -1095,4 +890,13 @@ body {
 
 #back-to-top:hover {
   background-color: #333;
+}
+.article-card a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.more-articles a {
+  text-decoration: none;
+  color: inherit;
 }

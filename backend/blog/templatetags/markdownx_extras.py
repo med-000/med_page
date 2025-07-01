@@ -6,9 +6,8 @@ register = template.Library()
 
 @register.filter
 def markdown_highlight(text, query):
-    html = markdownify(text)  # Markdown -> HTML
+    html = markdownify(text) 
     if not query:
         return html
-    # 検索語を <mark> で囲む（HTML中）
     pattern = re.escape(query)
     return re.sub(f'({pattern})', r'<mark>\1</mark>', html, flags=re.IGNORECASE)

@@ -12,8 +12,8 @@ from django.core.paginator import Paginator
 def home(request):
     articles = Article.objects.all().order_by('-created_day')
     articles, selecteds,tags= tagfilter(request,articles)
-    paginator = Paginator(articles, 6)  # 1ページあたり6件
-    page_number = request.GET.get('page')  # URLの?page=2 など
+    paginator = Paginator(articles, 6) 
+    page_number = request.GET.get('page') 
     page_obj = paginator.get_page(page_number)
     total_views = Article.objects.aggregate(Sum('view_count'))['view_count__sum'] or 1
     return render(request,'blog/home.html',{'articles':page_obj,'selecteds':selecteds,'page_obj': page_obj,'total_views':total_views})
@@ -51,8 +51,8 @@ def search(request):
             articles = articles.filter(q_objects).distinct()
             
     articles, selecteds,tags= tagfilter(request,articles)
-    paginator = Paginator(articles, 6)  # 1ページあたり6件
-    page_number = request.GET.get('page')  # URLの?page=2 など
+    paginator = Paginator(articles, 6)  
+    page_number = request.GET.get('page') 
     page_obj = paginator.get_page(page_number)
     total_views = Article.objects.aggregate(Sum('view_count'))['view_count__sum'] or 1
     return render(request,'blog/search.html',{'articles':page_obj,'tags':tags,'selecteds':selecteds,'query':query,'page_obj': page_obj,'total_views':total_views})
@@ -61,8 +61,8 @@ def category_filter(request,category):
     category=Category.objects.get(name=category)
     articles=Article.objects.filter(category=category)
     articles, selecteds,tags= tagfilter(request,articles)
-    paginator = Paginator(articles, 6)  # 1ページあたり6件
-    page_number = request.GET.get('page')  # URLの?page=2 など
+    paginator = Paginator(articles, 6)  
+    page_number = request.GET.get('page') 
     page_obj = paginator.get_page(page_number)
     total_views = Article.objects.aggregate(Sum('view_count'))['view_count__sum'] or 1
     return render(request,'blog/category_filter.html',{'category':category,'articles':page_obj,'selecteds':selecteds,'page_obj': page_obj,'total_views':total_views})
@@ -72,8 +72,8 @@ def tag_filter(request,category,tag):
     tag=Tag.objects.get(name=tag)
     articles=Article.objects.filter(tag=tag)
     articles, selecteds,tags= tagfilter(request,articles)
-    paginator = Paginator(articles, 6)  # 1ページあたり6件
-    page_number = request.GET.get('page')  # URLの?page=2 など
+    paginator = Paginator(articles, 6)  
+    page_number = request.GET.get('page') 
     page_obj = paginator.get_page(page_number)
     total_views = Article.objects.aggregate(Sum('view_count'))['view_count__sum'] or 1
     return render(request,'blog/tag_filter.html',{'category':category,'tag':tag,'articles':page_obj,'selecteds':selecteds,'page_obj': page_obj,'total_views':total_views})
@@ -85,7 +85,7 @@ def archive(request,year,month,day):
         created_day__day=day
     )
     articles, selecteds,tags= tagfilter(request,articles_all)
-    paginator = Paginator(articles_all, 6)  # 1ページに6件表示（お好みで変更可）
+    paginator = Paginator(articles_all, 6)  
     page_number = request.GET.get('page')
     articles = paginator.get_page(page_number)
     total_views = Article.objects.aggregate(Sum('view_count'))['view_count__sum'] or 1

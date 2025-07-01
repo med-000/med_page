@@ -8,98 +8,88 @@
   <meta charset="UTF-8">
   <title>{% block title %}My Blog{% endblock %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- CSS読み込み（必要に応じて外部CSSやCDN） -->
   <link rel="stylesheet" href="{% static 'blog/css/style.css' %}">
-
 </head>
 <body>
+
   <!-- ヘッダー -->
   <header class="site-header">
     <div class="title-block">
       <h1><a href="{% url 'home' %}">med's blog</a></h1>
-    </div><br>
+    </div>
     <nav class="category-block">
-    {% include 'blog/partials/category_nav.html' %}
-  </nav>
+      {% include 'blog/partials/category_nav.html' %}
+    </nav>
   </header>
 
-  <!-- ナビゲーション（カテゴリなど） -->
-   
+  <!-- メインコンテンツ -->
+  <main class="main-content-area">
 
-  <!-- メインコンテンツエリア -->
-  <main class="main-content-area" >
-  
-    <!-- 記事一覧や詳細 -->
+    <!-- 記事一覧エリア -->
     <section class="article-list-block">
-      {% block form%}
-   {% endblock %}
+      {% block form %}{% endblock %}
       {% block content %}
-      {% block article-title%}
-   {% endblock %}
-      <div class="article-grid">
-  {% if articles %}
-  {% for article in articles %}
-    <a class="article-card" href="{% url 'article' article.id%}">
-      {% if article.thumbnail %}
-        <img src="{{ article.thumbnail.url }}" alt="{{ article.title }}" class="article-image" />
-      {% else %}
-        <img src="/media/blog/images/S.jpg" alt="{{ article.title }}" class="article-image" />
-      {% endif %}
-      <div class="category-label">
-      {{ article.category.name }}
-  </div>
-      <div class="article-card-content">
-        <h2>
-        {{ article.title }}
-        </h2>
-        <p>{{ article.plain_content|slice:":50"}}</p>
-        <div class="player-controls">
-            <div class="progress-bar" >
-                <div class="progress" style="width: {{ article.view_count|div:total_views|mul:100|floatformat:2 }}%;"></div>
-            </div>
+        {% block article-title %}{% endblock %}
+
+        <div class="article-grid">
+          {% if articles %}
+            {% for article in articles %}
+              <a class="article-card" href="{% url 'article' article.id %}">
+                {% if article.thumbnail %}
+                  <img src="{{ article.thumbnail.url }}" alt="{{ article.title }}" class="article-image" />
+                {% else %}
+                  <img src="/media/blog/images/S.jpg" alt="{{ article.title }}" class="article-image" />
+                {% endif %}
+
+                <div class="category-label">{{ article.category.name }}</div>
+
+                <div class="article-card-content">
+                  <h2>{{ article.title }}</h2>
+                  <p>{{ article.plain_content|slice:":50" }}</p>
+
+                  <div class="player-controls">
+                    <div class="progress-bar">
+                      <div class="progress" style="width: {{ article.view_count|div:total_views|mul:100|floatformat:2 }}%;"></div>
+                    </div>
+                  </div>
+
+                  <div class="tag-list">
+                    {% for tag in article.tag.all %}
+                      <span class="tag">#{{ tag.name }}</span>
+                    {% endfor %}
+                  </div>
+
+                  <div class="article-date">
+                    {{ article.created_day|date:"Y/m/d" }}
+                  </div>
+                </div>
+              </a>
+            {% endfor %}
+          {% else %}
+            <p>該当する記事がありません</p>
+          {% endif %}
         </div>
 
-  <div class="tag-list">
-    {% for tag in article.tag.all %}
-      <span class="tag">#{{ tag.name }}</span>
-    {% endfor %}
-  </div>
+        <!-- ページネーション -->
+        <div class="pagination">
+          {% if articles.has_previous %}
+            <a href="?page={{ articles.previous_page_number }}">« 前へ</a>
+          {% endif %}
 
-        <div class="article-date">
-          {{ article.created_day|date:"Y/m/d" }}
+          {% for num in articles.paginator.page_range %}
+            {% if articles.number == num %}
+              <strong>{{ num }}</strong>
+            {% else %}
+              <a href="?page={{ num }}">{{ num }}</a>
+            {% endif %}
+          {% endfor %}
+
+          {% if articles.has_next %}
+            <a href="?page={{ articles.next_page_number }}">次へ »</a>
+          {% endif %}
         </div>
-      </div>
-    </a>
-  {% endfor %}
-  
-</div>
 
-  {% else %}
-    <p>該当する記事がありません</p>
-  {% endif %}
-
-  <div class="pagination">
-  {% if articles.has_previous %}
-    <a href="?page={{ articles.previous_page_number }}">« 前へ</a>
-  {% endif %}
-
-  {% for num in articles.paginator.page_range %}
-    {% if articles.number == num %}
-      <strong>{{ num }}</strong>
-    {% else %}
-      <a href="?page={{ num }}">{{ num }}</a>
-    {% endif %}
-  {% endfor %}
-
-  {% if articles.has_next %}
-    <a href="?page={{ articles.next_page_number }}">次へ »</a>
-  {% endif %}
-</div>
-
-</div>
-
-    {% endblock %}
-
+      {% endblock %}
     </section>
 
     <!-- サイドバー -->
@@ -120,22 +110,22 @@
 
   <!-- フッター -->
   <footer class="site-footer">
-      <div class="archive-block">
-        {% include 'blog/partials/archive_list.html' %}
-      </div>
-      <div class="sidebar-category-block">
-        {% include 'blog/partials/category_filter.html' %}
-      </div>
-      <div class="about-block">
-        {% include 'blog/partials/about.html' %}
-      </div>
-      <div class="tag-filter-block">
-        {% include 'blog/partials/follow_me.html' %}
-      </div>
-    <p>&copy; 2025 LmedR</p>
+    <div class="archive-block">
+      {% include 'blog/partials/archive_list.html' %}
+    </div>
+    <div class="sidebar-category-block">
+      {% include 'blog/partials/category_filter.html' %}
+    </div>
+    <div class="about-block">
+      {% include 'blog/partials/about.html' %}
+    </div>
+    <div class="tag-filter-block">
+      {% include 'blog/partials/follow_me.html' %}
+    </div>
+    <p>&copy; 2025 med</p>
   </footer>
 
-  <!-- 必要であれば JS 読み込み -->
+  <!-- JavaScript -->
   <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>

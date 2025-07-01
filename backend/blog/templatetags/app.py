@@ -44,5 +44,5 @@ def extract_toc(text):
         extensions=MARKDOWNX_MARKDOWN_EXTENSIONS + ['toc'],
         extension_configs=MARKDOWNX_MARKDOWN_EXTENSION_CONFIGS
     )
-    md.convert(text)  # 本文は捨てる、目次だけ生成
+    md.convert(text)  
     return mark_safe(md.toc)

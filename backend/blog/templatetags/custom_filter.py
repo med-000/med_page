@@ -44,11 +44,9 @@ def excerpt_with_highlight(text, query, radius=10):
         start = max(match.start() - radius, 0)
         end = min(match.end() + radius, len(text))
         snippet = text[start:end]
-        # 抜粋内でハイライト
         snippet = pattern.sub(lambda m: f'<mark>{m.group(0)}</mark>', snippet)
         snippets.append(snippet)
 
-    # 重複除去
     unique_snippets = []
     for s in snippets:
         if s not in unique_snippets:
