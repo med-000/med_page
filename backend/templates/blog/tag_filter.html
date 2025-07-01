@@ -1,5 +1,12 @@
 {% extends 'blog/home_base.html' %}
-{% block title%}
-  med's blog home
-{% endblock %}
-
+{% block article-title%}
+<style>
+.category{
+    padding-left:3rem;
+    padding-top:1rem;
+}
+</style>
+<div class="category">
+<h1>/{{category.name}}/#{{tag.name}}</h1>
+</div>
+   {% endblock %}

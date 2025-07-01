@@ -1,63 +1,42 @@
-<style>
-/* レイアウト：本文とサイドバー */
-.article-layout {
-  display: flex;
-  gap: 2rem;
-  position: relative;
-}
-
-/* 本文 */
-.main-content {
-  flex: 3;
-  min-width: 0;
-}
-
-/* サイドバー（目次） */
-.toc-sidebar {
-  flex: 1;
-  max-height: 80vh;
-  overflow-y: auto;
-  position: sticky;
-  top: 1rem;
-  background-color: #f8f9fa;
-  padding: 1rem;
-  border: 1px solid #ccc;
-  font-size: 0.9rem;
-}
-
-/* TOC内のスタイル微調整（必要に応じて） */
-.toc-sidebar ul {
-  list-style: none;
-  padding-left: 0;
-}
-.toc-sidebar li {
-  margin-bottom: 0.5em;
-}
-.toc-sidebar a {
-  text-decoration: none;
-  color: #007bff;
-}
-.toc-sidebar a:hover {
-  text-decoration: underline;
-}
-</style>
-
 {% load app %}
+{% load static %}
+<header class="site-header">
+    <div class="title-block">
+      <h1><a href="{% url 'home' %}">med's blog</a></h1>
+    </div><br>
+    <nav class="category-block">
+    {% include 'blog/partials/category_nav.html' %}
+  </nav>
+  </header>
 <!-- 記事の本文 -->
-<a href="/blog">
-    <p>戻る</p>
-</a>    
-{% if user.is_authenticated %}
-<p><a href="{% url 'article_edit' article.pk%}">記事を編集</a></p>
-{% else %}
-{% endif %}
+ <link rel="stylesheet" href="{% static 'blog/css/style.css' %}">
 <div class="article-layout">
-  <!-- 本文 -->
-  <div class="main-content">
-    {{ article.content|markdown_to_html }}
+  <div class="main-content markdown-content">
+    <div class="main-content-title">
+    <h1>{{article.title}}</h1>
+    </div>
+    作成日:{{article.created_day|date:"Y/m/d" }} 更新日:{{article.updated_day|date:"Y/m/d" }}<br>
+    <div class="category-tag">
+    <a class="label" href="{% url 'category_filter' article.category.name %}" >
+      /{{article.category}}
+    </a>
+      {% for tag in article.tag.all %}
+      <a class="label" href="/blog/category/{{ article.category.name }}/tag/{{ tag.name }}">
+      #{{tag}}
+      </a>
+      {% endfor %}
+      </div>
+    {% if article.thumbnail %}
+        <img src="{{ article.thumbnail.url }}" alt="{{ article.title }}" class="article-main-image" />
+      {% else %}
+        <img src="/media/blog/images/S.jpg" alt="{{ article.title }}" class="article-main-image" />
+      {% endif %}
+    <h2>目次</h2>
+    <div class="toc">
+    {% extract_toc article.content %}
+    </div>
+    {{ article.content|markdown_to_html|safe }}
   </div>
-
-  <!-- サイドバー（目次） -->
   <aside class="toc-sidebar">
     <h4>目次</h4>
     {% extract_toc article.content %}
@@ -65,33 +44,91 @@
 </div>
 
 
-{% for comment in comments %}
-{{comment.commentater}}<br>
-{{ comment.content}}<br>
-{{comment.day|date:"Y/n/j "}}<br>
-<p>------</p>
-{% endfor %}
-<form method = "POST">
-    {% csrf_token %}
-    <label for="comment">ニックネーム:</label><br>
-  <input type="text" id="author" name="author" placeholder="あなたの名前を入力" required ><br>
-    <label for="comment">コメント:</label><br>
-  <textarea id="comment" name="comment" rows="4" cols="50" placeholder="コメントを入力してください..."required></textarea><br>
-  <button type="submit">送信</button>
-</form>
-{% for article in articles|slice:":5"%}
-    <div class="card">
-      <a style = "text-decoration: none; color : black; " href = "/blog/article/{{article.id}}">
-        <h2>{{article.title}}</h2>
-        {% for tag in article.tag.all%}
-        <span>{{tag.name}}</span>
-        {% endfor %}
-        <p>{{article.summary|truncatewords:20}}</p>
-        <p>{{article.created_day|date:"Y/n/j "}}</p>
-      </a>
+
+
+<div class="comment-section">
+  <h2>コメント</h2>
+  {% for comment in comments %}
+    <div class="comment-card">
+      <p class="comment-author">{{ comment.commentater }}</p>
+      <p class="comment-content">{{ comment.content }}</p>
+      <p class="comment-date">{{ comment.day|date:"Y/n/j" }}</p>
     </div>
+  {% empty %}
+    <p>まだコメントがありません。</p>
+  {% endfor %}
+
+  <form method="POST" class="comment-form">
+    {% csrf_token %}
+    <label for="author">ニックネーム:</label>
+    <input type="text" id="author" name="author" placeholder="あなたの名前を入力" required>
+
+    <label for="comment">コメント:</label>
+    <textarea id="comment" name="comment" rows="4" placeholder="コメントを入力してください..." required></textarea>
+
+    <button type="submit">送信</button>
+  </form>
+</div>
+
+<div class="more-articles">
+  <h2>関連記事</h2>
+  <div class="article-grid">
+    {% for article in articles|slice:":4" %}
+      <div class="article-card">
+        <a href="/blog/article/{{ article.id }}">
+          <div class="image-wrapper">
+            {% if article.thumbnail %}
+              <img src="{{ article.thumbnail.url }}" alt="{{ article.title }}" class="article-image">
+            {% else %}
+              <img src="/media/blog/images/S.jpg" alt="{{ article.title }}" class="article-image">
+            {% endif %}
+            <div class="category-label">{{ article.category }}</div>
+          </div>
+          <div class="article-card-content">
+            <h2>{{ article.title }}</h2>
+            <p>{{ article.summary|truncatewords:20 }}</p>
+            <div class="tag-list">
+              {% for tag in article.tag.all %}
+                <span class="tag">#{{ tag.name }}</span>
+              {% endfor %}
+            </div>
+            <p class="article-date">{{ article.created_day|date:"Y/n/j" }}</p>
+          </div>
+        </a>
+      </div>
     {% endfor %}
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/default.min.css">
+  </div>
+</div>
+<!-- トップに戻るボタン -->
+<button id="back-to-top" title="ページトップへ">▲
+</button>
+
+
+<a href="/">
+    <p>戻る</p>
+</a>    
+{% if user.is_authenticated %}
+<p><a href="{% url 'article_edit' article.pk%}">記事を編集</a></p>
+{% else %}
+{% endif %}
+<!-- 変更後（黒背景に合うテーマ） -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/tomorrow-night.min.css">
+
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 
+<script>
+  const backToTopBtn = document.getElementById("back-to-top");
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+      backToTopBtn.style.display = "block";
+    } else {
+      backToTopBtn.style.display = "none";
+    }
+  });
+
+  backToTopBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>

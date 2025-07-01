@@ -2,6 +2,7 @@ html, body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  background-color: #ddd;
 }
 
 .main-content-area {
@@ -28,6 +29,14 @@ html, body {
 }
 
 /*
+body {
+  background-color: #ddd;
+  color: #222; 
+  font-family: "Helvetica Neue", "Arial", sans-serif;
+  line-height: 1.8;
+  margin: 0;
+  padding: 0;
+}
 .article-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr); 
@@ -192,7 +201,7 @@ html, body {
   flex: 1;  
   max-width: 300px;           
   min-height: 100vh;           
-  background-color: #fff;   
+  background-color: #ddd;   
   color: #fff;
   padding: 1rem;
   margin-left: 0;
@@ -725,3 +734,365 @@ html, body {
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
+
+
+
+/* カテゴリは少し目立たせたいなら */
+.category-label {
+  background-color: #797979;
+  color: white;
+  border: none;
+}
+
+.category-label:hover {
+  background-color: #747474;
+}
+
+
+
+.article-layout {
+  display: flex;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  gap: 2rem;
+   align-items: flex-start;
+}
+
+/* 本文部分 */
+.main-content {
+  flex: 0 1 800px;
+  min-width: 0;
+  background-color: #fff; /* 記事本文は白背景 */
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* 軽めの影 */
+  color: #333; /* 文字は濃いグレー */
+}
+
+/* 記事スタイル */
+.main-content h1,
+.main-content h2,
+.main-content h3 {
+  font-weight: bold;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #ccc; /* 柔らかいグレー線 */
+  padding-bottom: 0.3rem;
+  color: #111; /* 見出しは濃い目 */
+}
+
+.main-content p {
+  margin: 1rem 0;
+  font-size: 1.05rem;
+  color: #444; /* 段落テキストは濃いグレー */
+}
+
+.main-content a {
+  color: #3b82f6; /* 爽やかなブルー */
+  text-decoration: underline;
+}
+
+.main-content blockquote {
+  background-color: #f0f0f0; /* 薄いグレー */
+  border-left: 5px solid #bbb;
+  padding: 1rem;
+  margin: 1.5rem 0;
+  border-radius: 6px;
+  font-style: italic;
+  color: #666;
+}
+
+/* コードブロック */
+.main-content pre {
+  background-color: #1e1e1e; /* 黒に近いダークグレー */
+  color: #ddd; /* 明るい文字色 */
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: "Fira Code", monospace;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  scroll-behavior: smooth;
+}
+
+.main-content code {
+  background-color: #1e1e1e; /* 少し明るめの黒寄りグレー */
+  color: #eee; /* 明るい文字 */
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-family: "Fira Code", monospace;
+  font-size: 0.95rem;
+}
+
+
+/* 画像 */
+.main-content img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+/* 目次サイドバー */
+
+.toc-sidebar {
+  position: sticky;
+  top: 80px; /* ヘッダー分の高さ調整 */
+  align-self: flex-start;
+  height: fit-content;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  background-color: #f5f5f5;
+  padding: 1.2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.toc-sidebar h4 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: #111;
+}
+
+/* 階層構造に合わせたインデント */
+.toc-sidebar ul ul {
+  padding-left: 1rem;
+}
+
+.toc-sidebar ul ul ul {
+  padding-left: 2rem;
+}
+
+.toc-sidebar ul ul ul ul {
+  padding-left: 3rem;
+}
+
+/* リスト項目のマージンも調整可能 */
+.toc-sidebar li {
+  margin-bottom: 0.4rem;
+}
+
+.toc-sidebar a {
+  color: #4b4b4b;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.toc-sidebar a:hover {
+  color: #000;
+  text-decoration: underline;
+}
+
+.article-main-image {
+  width: 100%;
+  aspect-ratio: 16/ 7; /* 縦9:横16 */
+  object-fit: cover;
+}
+.main-content-title h1 {
+  font-size: 3rem;        /* 大きな文字サイズ */
+  font-weight: bold;
+  color: #111;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+  border-bottom: none;    /* 下線を消す */
+  padding-bottom: 0;      /* 下の余白もなし */
+  line-height: 1.2;
+  /* 必要なら文字間やフォントファミリも調整 */
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.2em 0.4em;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border: 1px solid #858585;
+  text-decoration: none;
+  color: #464646;
+  background-color: transparent;
+  transition: background-color 0.2s ease;
+  margin-top: 1rem;
+}
+
+.label i {
+  font-size: 0.9rem;
+}
+
+.label:hover {
+  background-color: #000000;
+  color: #ffffff;
+} 
+
+.label a {
+  color: #000;
+}
+
+
+.category-tag a {
+  color:#000;
+  text-decoration: none;
+}
+
+.comment-section {
+  margin-top: 3rem;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  margin-left: 1.5rem;
+  margin-right:1.5rem;
+}
+
+.comment-section h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  color: #222;
+}
+
+.comment-card {
+  background: #fff;
+  border-left: 4px solid #000;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.comment-author {
+  font-weight: bold;
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.comment-content {
+  margin-bottom: 0.5rem;
+  color: #444;
+}
+
+.comment-date {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.comment-form input,
+.comment-form textarea {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.comment-form button {
+  background-color: #000;
+  color: #fff;
+  font-weight: bold;
+  padding: 0.8rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.comment-form button:hover {
+  background-color: #333;
+}
+
+.more-articles {
+  margin-top: 4rem;
+  padding: 2rem 0;
+  border-top: 1px solid #ddd;
+  margin-left: 1.5rem;
+  margin-right:1.5rem;
+}
+
+.more-articles h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #222;
+}
+
+.related-article-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.related-article-card {
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+
+.related-article-card:hover {
+  transform: translateY(-4px);
+}
+
+.related-article-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.related-article-card h3 {
+  font-size: 1.1rem;
+  padding: 0.8rem 1rem 0 1rem;
+  color: #222;
+}
+
+.related-article-card .tag-list {
+  padding: 0 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.4rem;
+}
+
+.related-article-card .tag {
+  font-size: 0.75rem;
+  color: #555;
+  text-decoration: underline;
+}
+
+.related-date {
+  font-size: 0.8rem;
+  color: #999;
+  padding: 0 1rem 1rem 1rem;
+}
+
+#back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  display: none; /* 初期は非表示 */
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  z-index: 1000;
+  transition: background-color 0.2s;
+}
+
+#back-to-top:hover {
+  background-color: #333;
+}
