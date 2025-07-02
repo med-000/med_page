@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,11 +26,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 SECRET_KEY = 'django-insecure-+yzu@m8+*53%t8k67bq$szv+c2=^h6@=n#r@c_)&521hyr23+k'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["119.173.113.43","192.168.0.129"]
 
-
+STATIC_ROOT = "/usr/share/nginx/html/med_page/static"
 # Application definition
 
 INSTALLED_APPS = [
@@ -144,3 +145,6 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',  
 ]
 STATIC_URL = '/static/'
+
+load_dotenv()
+SECRET_KEY = os.environ.get("SECRET_KEY")
