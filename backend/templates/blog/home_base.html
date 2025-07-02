@@ -38,7 +38,7 @@
                 {% if article.thumbnail %}
                   <img src="{{ article.thumbnail.url }}" alt="{{ article.title }}" class="article-image" />
                 {% else %}
-                  <img src="/media/blog/images/S.jpg" alt="{{ article.title }}" class="article-image" />
+                  <img src="/media/blog/images/noImage.jpg" alt="{{ article.title }}" class="article-image" />
                 {% endif %}
 
                 <div class="category-label">{{ article.category.name }}</div>

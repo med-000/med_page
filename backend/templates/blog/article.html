@@ -24,7 +24,7 @@
     </div>
 
     <p>
-      作成日: {{ article.created_day|date:"Y/m/d" }}　
+      作成日: {{ article.created_day|date:"Y/m/d" }}
       更新日: {{ article.updated_day|date:"Y/m/d" }}
     </p>
 
@@ -42,7 +42,7 @@
     {% if article.thumbnail %}
       <img src="{{ article.thumbnail.url }}" alt="{{ article.title }}" class="article-main-image">
     {% else %}
-      <img src="/media/blog/images/S.jpg" alt="{{ article.title }}" class="article-main-image">
+      <img src="/media/blog/images/noImage.jpg" alt="{{ article.title }}" class="article-main-image">
     {% endif %}
 
     <h2>目次</h2>
@@ -96,7 +96,7 @@
             {% if article.thumbnail %}
               <img src="{{ article.thumbnail.url }}" alt="{{ article.title }}" class="article-image">
             {% else %}
-              <img src="/media/blog/images/S.jpg" alt="{{ article.title }}" class="article-image">
+              <img src="/media/blog/images/noImage.jpg" alt="{{ article.title }}" class="article-image">
             {% endif %}
             <div class="category-label">{{ article.category }}</div>
           </div>
