@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-+yzu@m8+*53%t8k67bq$szv+c2=^h6@=n#r@c_)&521hyr23+k
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["119.173.113.43","192.168.0.129"]
+ALLOWED_HOSTS = ["med.f5.si","119.173.113.43","192.168.0.129"]
 
 STATIC_ROOT = "/usr/share/nginx/html/med_page/static"
 # Application definition
