@@ -34,37 +34,39 @@
         <div class="article-grid">
           {% if articles %}
             {% for article in articles %}
-              <a class="article-card" href="{% url 'article' article.id %}">
-                {% if article.thumbnail %}
-                  <img src="{{ article.thumbnail.url }}" alt="{{ article.title }}" class="article-image" />
-                {% else %}
-                  <img src="/media/blog/images/noImage.jpg" alt="{{ article.title }}" class="article-image" />
-                {% endif %}
+              {% if article.public %}
+                <a class="article-card" href="{% url 'article' article.id %}">
+                  {% if article.thumbnail %}
+                    <img src="{{ article.thumbnail.url }}" alt="{{ article.title }}" class="article-image" />
+                  {% else %}
+                    <img src="/media/blog/images/noImage.jpg" alt="{{ article.title }}" class="article-image" />
+                  {% endif %}
 
-                <div class="category-label">{{ article.category.name }}</div>
+                  <div class="category-label">{{ article.category.name }}</div>
 
-                <div class="article-card-content">
-                  <h2>{{ article.title }}</h2>
-                  <p>{{ article.plain_content|slice:":50" }}</p>
+                  <div class="article-card-content">
+                    <h2>{{ article.title }}</h2>
+                    <p>{{ article.plain_content|slice:":50" }}</p>
 
-                  <div class="player-controls">
-                    <div class="progress-bar">
-                      <div class="progress" style="width: {{ article.view_count|div:total_views|mul:100|floatformat:2 }}%;"></div>
+                    <div class="player-controls">
+                      <div class="progress-bar">
+                        <div class="progress" style="width: {{ article.view_count|div:total_views|mul:100|floatformat:2 }}%;"></div>
+                      </div>
+                    </div>
+
+                    <div class="tag-list">
+                      {% for tag in article.tag.all %}
+                        <span class="tag">#{{ tag.name }}</span>
+                      {% endfor %}
+                    </div>
+
+                    <div class="article-date">
+                      {{ article.created_day|date:"Y/m/d" }}
                     </div>
                   </div>
-
-                  <div class="tag-list">
-                    {% for tag in article.tag.all %}
-                      <span class="tag">#{{ tag.name }}</span>
-                    {% endfor %}
-                  </div>
-
-                  <div class="article-date">
-                    {{ article.created_day|date:"Y/m/d" }}
-                  </div>
-                </div>
-              </a>
-            {% endfor %}
+                </a>
+              {% endfor %}
+            {% endif %}
           {% else %}
             <p>該当する記事がありません</p>
           {% endif %}
