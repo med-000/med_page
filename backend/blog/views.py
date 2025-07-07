@@ -12,6 +12,7 @@ from django.core.paginator import Paginator
 def home(request):
     articles = Article.objects.all().order_by('-created_day')
     articles, selecteds,tags= tagfilter(request,articles)
+    articles=articles.filter(public=True)
     paginator = Paginator(articles, 6) 
     page_number = request.GET.get('page') 
     page_obj = paginator.get_page(page_number)

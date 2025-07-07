@@ -34,7 +34,6 @@
         <div class="article-grid">
           {% if articles %}
             {% for article in articles %}
-              {% if article.public %}
                 <a class="article-card" href="{% url 'article' article.id %}">
                   {% if article.thumbnail %}
                     <img src="{{ article.thumbnail.url }}" alt="{{ article.title }}" class="article-image" />
@@ -66,7 +65,6 @@
                   </div>
                 </a>
               {% endfor %}
-            {% endif %}
           {% else %}
             <p>該当する記事がありません</p>
           {% endif %}
