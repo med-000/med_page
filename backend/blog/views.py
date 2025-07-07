@@ -25,7 +25,7 @@ def home_edit(request):
 def article(request,pk):
     article=Article.objects.get(id=pk)
     comments=Comment.objects.filter(article=article)
-    articles = Article.objects.filter(tag__name__in=article.tag.values_list('name', flat=True)).exclude(id=pk).order_by('created_day')
+    articles = Article.objects.filter(tag__name__in=article.tag.values_list('name', flat=True),public=True).exclude(id=pk).order_by('created_day')
     if request.method == 'POST':
         commentater=request.POST['author']
         content=request.POST['comment']
