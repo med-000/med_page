@@ -23,6 +23,7 @@ class Article(models.Model):
     category=models.ForeignKey('Category',related_name='article',on_delete=models.SET_NULL,null=True,blank=True)
     view_count = models.IntegerField(default=0)
     plain_content = models.TextField(editable=False, blank=True)  
+    public=models.BooleanField(verbose_name="公開")
 
     def save(self, *args, **kwargs):
         html = markdownify(self.content)
