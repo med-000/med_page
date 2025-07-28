@@ -1,0 +1,80 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>med page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+    <header class = "site-header">
+        <div class = "link-block">
+            {% for links in link %}
+            <a href ="{{link.url}}" target="_blank">
+                {{article.image}}
+            </a>
+            {% endfor %}
+        </div>
+        <div class = "header-image">
+            <img src="/media/home/images/header_image.png" alt="Header Image">
+        </div>
+        <div class = "header-icon">
+            <img src="/media/home/images/header_icon.png" alt="Header Icon">
+        </div>
+        <div class = "header-name">
+            <h1>
+                med(前の田んぼ)
+            </h1>
+        </div>
+        <main>
+            {% include "templates/home/about_me.html" %}
+            {% block about_me %}{% endblock %}
+            
+            <button
+                hx-get="/works"
+                hx-target="#output"
+                hx-swap="innerHTML">
+                works
+            </button>
+
+            <button
+                hx-get="/history"
+                hx-target="#output"
+                hx-swap="innerHTML">
+                history
+            </button>
+
+            <button
+                hx-get="/miniblog"
+                hx-target="#output"
+                hx-swap="innerHTML">
+                miniblog
+            </button>
+
+            <button
+                hx-get="/products"
+                hx-target="#output"
+                hx-swap="innerHTML">
+                products
+            </button>
+
+            <button
+                hx-get="/techstack"
+                hx-target="#output"
+                hx-swap="innerHTML">
+                techstack
+            </button>
+            <div id="output">
+                {% include "templates/miniblog/miniblog_base.html" %}
+                {% block miniblog %}{% endblock %}
+            </div>
+        </main>
+
+        <footer>
+            <div>
+                copyright &copy; 2025 med
+            </div>
+        </footer>
+</body>

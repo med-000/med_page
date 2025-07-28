@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+load_dotenv()
+print("DEBUG: SECRET_KEY =", os.getenv("SECRET_KEY"))
+print("DEBUG: ALLOWED_HOSTS =", os.getenv("ALLOWED_HOSTS"))
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -23,10 +27,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-+yzu@m8+*53%t8k67bq$szv+c2=^h6@=n#r@c_)&521hyr23+k'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG =False
+DEBUG =True
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS").split(",")
 
@@ -146,5 +150,4 @@ STATICFILES_DIRS = [
 ]
 STATIC_URL = '/static/'
 
-load_dotenv()
-SECRET_KEY = os.environ.get("SECRET_KEY")
+
