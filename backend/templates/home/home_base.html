@@ -10,67 +10,98 @@
 </head>
 <body>
     <header class = "site-header">
-        <div class = "link-block">
-            {% for links in link %}
-            <a href ="{{link.url}}" target="_blank">
-                {{article.image}}
-            </a>
-            {% endfor %}
-        </div>
-        <div class = "header-image">
-            <img src="/media/home/images/header_image.png" alt="Header Image">
-        </div>
-        <div class = "header-icon">
-            <img src="/media/home/images/header_icon.png" alt="Header Icon">
-        </div>
-        <div class = "header-name">
+        <div class = "title-block">
             <h1>
-                med(前の田んぼ)
+                med
             </h1>
         </div>
-        <main>
-            {% include "templates/home/about_me.html" %}
-            {% block about_me %}{% endblock %}
-            
-            <button
+        <div class = "right-buttons">    
+
+            {% for link in SocialLinks %}
+                <a href ="{{link.url}}" target="_blank" class = "link-block">
+                </a>
+            {% endfor %}
+
+            <div class = "menu">
+                <div class = "menu-item">
+                <span>☰</span>
+                <div class="dropdown">
+                    <a href="#">blog</a>
+                </div>
+                </div>
+            </div>
+
+        </div>
+    </header>
+    <div class = "header-image">
+        <img src="{{ aboutme.headerimage.url }}" alt="Header Image">
+    </div>
+    <main class = "site-main">
+        <a href="{% url 'profilepage' %}" class="profile-card-link">
+          <div class="profile-card">
+            <div class="header-icon">
+              <img src="{{ aboutme.iconimage.url }}" alt="Header Icon">
+            </div>
+            <div class="profile-content">
+               <div class="header-name">
+                 <h1>{{ aboutme.name }}</h1>
+               </div>
+               <div class="aboutme">
+                 {% include "templates/home/about_me.html" %}
+               </div>
+            </div>
+          </div> 
+        </a>
+
+        <div class = "content">
+            <button class="content-bottun active"
                 hx-get="/works"
                 hx-target="#output"
                 hx-swap="innerHTML">
                 works
             </button>
-
-            <button
+            <button class="content-bottun"
                 hx-get="/history"
                 hx-target="#output"
                 hx-swap="innerHTML">
                 history
             </button>
-
-            <button
+            <button class="content-bottun"
                 hx-get="/miniblog"
                 hx-target="#output"
                 hx-swap="innerHTML">
                 miniblog
             </button>
-
-            <button
+            <button class="content-bottun"
                 hx-get="/products"
                 hx-target="#output"
                 hx-swap="innerHTML">
                 products
             </button>
-
-            <button
+            <button class="content-bottun"
                 hx-get="/techstack"
                 hx-target="#output"
                 hx-swap="innerHTML">
                 techstack
             </button>
-            <div id="output">
-                {% include "templates/miniblog/miniblog_base.html" %}
-                {% block miniblog %}{% endblock %}
-            </div>
-        </main>
+            <button class="content-bottun"
+                hx-get="/techstack"
+                hx-target="#output"
+                hx-swap="innerHTML">
+                links
+            </button>
+            <button class="content-bottun"
+                hx-get="/blog"
+                hx-target="#output"
+                hx-swap="innerHTML">
+                blog
+            </button>
+        </div>
+        <div class="content-main" id="output">
+            {% include "templates/miniblog/miniblog_base.html" %}
+            {% block miniblog %}{% endblock %}
+        </div>
+    </main>
 
         <footer>
             <div>
@@ -78,3 +109,15 @@
             </div>
         </footer>
 </body>
+
+<script>
+  const tabs = document.querySelectorAll(".content-bottun");
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      tabs.forEach(t => t.classList.remove("active"));
+      tab.classList.add("active");
+    });
+  });
+</script>
+
+

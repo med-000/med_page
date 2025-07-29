@@ -1,0 +1,217 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color:black;
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0rem 1rem; 
+  background-color: black;
+  box-sizing: border-box;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-weight: bold;
+  height: 74.5px;
+}
+
+.title-block {
+  margin: 0;
+  font-size: 1.0rem;
+  line-height: 1;
+  color: white;
+}
+
+.right-buttons {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 20px;
+  gap: 5px;
+}
+
+.link-block {
+  margin-left: auto;
+  margin-right: 20px;
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  border-radius: 4px;
+}
+
+.menu {
+  display: flex;
+  background-color: black;
+  padding: 0;
+  margin-left: auto;
+}
+
+.menu-item {
+  position: relative;
+  padding: 0rem 20px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: black;
+}
+
+.menu-item span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  background-color: black;
+  color: white;
+  border-radius: 4px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  z-index: 100;
+}
+
+.dropdown a {
+  display: block;
+  padding: 20px 40px;
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.dropdown a:hover {
+  background-color: #eee;
+}
+
+.menu-item:hover .dropdown {
+  display: block;
+}
+
+
+.header-image img{
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+.profile-card-link {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.profile-card {
+  display: flex;
+  background-color: white;
+  max-width: 1000px;
+  align-items: flex-start; 
+  margin: 50px auto;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.header-icon img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 2px solid black;
+  pointer-events: none; 
+}
+
+.profile-content {
+  display: flex;
+  flex-direction: column;
+  margin-left: 30px;
+  justify-content: flex-start;
+  text-align:left;
+  flex: 1;
+}
+
+
+
+.header-name h1{
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    color: black;
+    font-weight: bold;
+    font-size: 3.0rem;
+    display: flex;
+}
+
+.aboutme h1 {
+  color: black;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    left: 20px;
+}
+
+.about_me_content{
+    font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+.content {
+  display: flex;
+  border-bottom: 1px solid #333;
+  background-color: black;
+  padding: 0 16px;
+}
+
+.content-bottun {
+  flex: 1;
+  background: none;
+  border: none;
+  color: #888;
+  font-weight: bold;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 14px;
+  position: relative;
+  cursor: pointer;
+}
+
+.content-bottun:hover {
+  color: #ccc;
+}
+
+.content-bottun.active {
+  color: white;
+}
+
+.content-bottun.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 25%;
+  width: 50%;
+  height: 3px;
+  background-color: white; 
+  border-radius: 3px 3px 0 0;
+}
+ .content-main {
+    color: white;
+}
+
+.site-footer p {
+  color: white;
+  text-align: center;
+  margin:0;
+  padding:20px;
+  font-size:20px;
+}
