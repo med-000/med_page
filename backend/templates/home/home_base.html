@@ -19,6 +19,7 @@
 
             {% for link in SocialLinks %}
                 <a href ="{{link.url}}" target="_blank" class = "link-block">
+                    <img src="{{ link.image.url }}" class="link-block-icon">
                 </a>
             {% endfor %}
 
@@ -26,7 +27,7 @@
                 <div class = "menu-item">
                 <span>☰</span>
                 <div class="dropdown">
-                    <a href="#">blog</a>
+                    <a href="http://med.f5.si/blog" target="_blank">blog</a>
                 </div>
                 </div>
             </div>
@@ -89,12 +90,6 @@
                 hx-target="#output"
                 hx-swap="innerHTML">
                 links
-            </button>
-            <button class="content-bottun"
-                hx-get="/blog"
-                hx-target="#output"
-                hx-swap="innerHTML">
-                blog
             </button>
         </div>
         <div class="content-main" id="output">
