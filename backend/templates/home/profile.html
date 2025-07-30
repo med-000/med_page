@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>med profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+    <header class = "site-header">
+        <div class = "title-block">
+            <h1>
+                med
+            </h1>
+        </div>
+        <div class = "right-buttons">    
+
+            {% for link in SocialLinks %}
+                <a href ="{{link.url}}" target="_blank" class = "link-block">
+                    <img src="{{ link.image.url }}" class="link-block-icon">
+                </a>
+            {% endfor %}
+
+            <div class = "menu">
+                <div class = "menu-item">
+                <span>☰</span>
+                <div class="dropdown">
+                    <a href="http://med.f5.si/blog" target="_blank">blog</a>
+                </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="profile-main">
+        <h1 class="profile">
+            Profile
+        </h1> 
+        <h2 class="profile-content">
+            東京電機大学に所属する20歳の大学生<br>
+            <br>
+            Djangoを用いたwebアプリの開発にハマった情報系学生です。<br>
+            <br>
+            最近は、自宅鯖の運営だったりiOS開発に手を出しています。<br>
+            <br>
+            趣味は、ガジェット集めだったりデスク整備だったり<br>
+        </h2>
+         <h1 class="future-vision">
+            Future Vision
+        </h1>
+        <h2 class="future-vision-content">
+            <div>
+            セキュリティ<br>
+            </div><br>
+            指数関数的に増えていく技術の数と種類、それに比例するように増えていく脅威から人々を守っていきたいと感じる。<br>
+            CTFややKali Linuxの知識を蓄えている<br>
+            <br>
+            <div>
+            インフラ<br>
+            </div><br>
+            世の中に溢れているシステムを知ることによって人と技術の結び目を知ることと同時にそれらを開発していく人物になりたい。<br>
+            最近では、nginxとgunicornを用いた自宅サーバーの運営を行っっている。これからは、さらに通信速度などをあげ、UXを向上させていきたい。<br>
+            <br>
+            <div>
+            アプリ開発<br>
+            </div><br>
+            webアプリをはじめとした様々なアプリを開発していきたい。<br>
+            最近では、Djangoを使ったblogなどを開発した。<br>
+            <br>
+        </h2>
+        <h1 class="contact">
+            Contact
+        </h1>
+        <h2 class="contact-content">
+            Email<br>
+            <br>
+            <a href="mailto:med.rk000@gmail.com">med.rk000@gmail.com<br>
+        </h2>
+    </main>
+    <footer class="site-footer">
+        <div>
+            copyright &copy; 2025 med
+        </div>
+    </footer>
+</body>

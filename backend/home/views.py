@@ -10,3 +10,8 @@ def aboutme(request):
     SocialLinks = SocialLink.objects.all()
     aboutme=AboutMe.objects.first()
     return render(request,'home/about_me.html',{'SocialLinks':SocialLinks,'aboutme':aboutme})
+
+def profile(request):
+    SocialLinks = SocialLink.objects.all()
+    aboutme=AboutMe.objects.first()
+    return render(request,'home/profile.html',{'SocialLinks':SocialLinks,'aboutme':aboutme})
