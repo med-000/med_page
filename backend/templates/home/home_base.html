@@ -3,7 +3,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>med page</title>
+    <title>{% block titile %}med page{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
     <script src="https://unpkg.com/htmx.org@1.9.10"></script>
@@ -12,7 +12,9 @@
     <header class = "site-header">
         <div class = "title-block">
             <h1>
-                med
+                <a href="{% url 'home'%}">
+                  med
+                </a>
             </h1>
         </div>
         <div class = "right-buttons">    
@@ -27,6 +29,7 @@
                 <div class = "menu-item">
                 <span>☰</span>
                 <div class="dropdown">
+                    <a href="{% url 'home'%}">home</a>
                     <a href="http://med.f5.si/blog" target="_blank">blog</a>
                 </div>
                 </div>
@@ -34,6 +37,7 @@
 
         </div>
     </header>
+    {% block main %}
     <div class = "header-image">
         <img src="{{ aboutme.headerimage.url }}" alt="Header Image">
     </div>
@@ -97,7 +101,7 @@
             {% block miniblog %}{% endblock %}
         </div>
     </main>
-
+    {% endblock %}
         <footer class="site-footer">
             <div>
                 copyright &copy; 2025 med

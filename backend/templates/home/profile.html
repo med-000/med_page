@@ -1,43 +1,11 @@
+{% extends 'home/home_base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>med profile</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
-    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
-</head>
-<body>
-    <header class = "site-header">
-        <div class = "title-block">
-            <h1>
-                med
-            </h1>
-        </div>
-        <div class = "right-buttons">    
-
-            {% for link in SocialLinks %}
-                <a href ="{{link.url}}" target="_blank" class = "link-block">
-                    <img src="{{ link.image.url }}" class="link-block-icon">
-                </a>
-            {% endfor %}
-
-            <div class = "menu">
-                <div class = "menu-item">
-                <span>☰</span>
-                <div class="dropdown">
-                    <a href="http://med.f5.si/blog" target="_blank">blog</a>
-                </div>
-                </div>
-            </div>
-        </div>
-    </header>
+{% block main %}
     <main class="profile-main">
         <h1 class="profile">
             Profile
         </h1> 
-        <h2 class="profile-content">
+        <h2 class="myprofile-content">
             東京電機大学に所属する20歳の大学生<br>
             <br>
             Djangoを用いたwebアプリの開発にハマった情報系学生です。<br>
@@ -78,9 +46,4 @@
             <a href="mailto:med.rk000@gmail.com">med.rk000@gmail.com<br>
         </h2>
     </main>
-    <footer class="site-footer">
-        <div>
-            copyright &copy; 2025 med
-        </div>
-    </footer>
-</body>
+{% endblock %}
