@@ -1,3 +1,30 @@
-<h1>
-    history
-</h1>
+{% for year, history_list in group_histories.items %}
+  <div class="history-list">
+    <div class="history-year-list">
+      <h2>{{ year }}</h2>
+      <ol class="history-card">
+        {% for history in history_list %}
+          <li>
+            <div class="category-badge">
+              {{ history.category.name }}
+            </div>
+            <strong>{{ history.name }}</strong>
+            <p>{{ history.content }}</p>
+            <div class="tag-list">
+              {% for tag in history.tag.all %}
+                <span class="tag">#{{ tag.name }}</span>
+              {% endfor %}
+            </div>
+            <div class="date">
+                {% if history.end_day %}
+                {{history.start_day|date:"M d" }}-{{history.end_day|date:"M d" }}
+                {% else %}
+                {{ history.start_day|date:"M d" }}
+                {% endif %}
+            </div>
+          </li>
+        {% endfor %}
+      </ol>
+    </div>
+  </div>
+{% endfor %}
