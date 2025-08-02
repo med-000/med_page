@@ -1,0 +1,59 @@
+<body>
+
+<div class="product-grid">
+    {% if products %}
+    {% for product in products%}
+    <a class="product-card" href="{{product.url}}">
+
+        <div class="image-content">
+
+            <div class="product-category">
+                {{product.category.name}}
+            </div>
+
+            {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+            {% else %}
+            <img src="/media/product/images/.jpg" alt="{{ product.name }}" class="product-image">
+            {% endif %}
+
+        </div>
+
+        <div class="product-content">
+
+            <div class="product-name">
+              {{product.name}}
+            </div>
+
+            <div class="product-explanation">
+              {{product.content}}
+            </div>
+
+            <div class="product-techexplanation">
+                <h1>
+                    技術説明
+                </h1>
+                <div class="techcontent">
+                  {{product.techcontent}}<br><br><br>
+                </div>
+            </div>
+
+            <div class="product-tag-list">
+              {% for tag in product.tag.all %}
+                  <span class="product-tag">
+                    #{{tag.name}}
+                  </span>
+              {% endfor %}
+            </div>
+
+        </div>
+
+        <div>
+        </div>
+    </a>
+    {% endfor %}
+    {% else %}
+    products
+    {% endif %}
+</div>
+</body>

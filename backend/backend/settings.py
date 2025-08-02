@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'markdownx',
     'home',
     'blog',
+    'work',
+    'product',
 ]
 
 MIDDLEWARE = [

@@ -24,9 +24,9 @@ urlpatterns = [
     path('markdownx/',include('markdownx.urls')),
     path('history',include('history.urls')),
     path('miniblog',include('miniblog.urls')),
-    path('products',include('products.urls')),
+    path('product',include('product.urls')),
     path('techstack',include('techstack.urls')),
-    path('works',include('works.urls')),
+    path('work',include('work.urls')),
     path('blog', include('blog.urls',namespace='blog')),
     
 ]

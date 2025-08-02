@@ -1,0 +1,54 @@
+<body>
+
+<div class="work-grid">
+    {% if works %}
+    {% for work in works%}
+    {% if work.url %}
+    <a class="work-card" href="{{work.url}}">
+    {% else %}
+    <a class="work-card" href="{% url 'work_pre' work.id %}">
+    {% endif %}
+
+        <div class="image-content">
+
+            <div class="work-category">
+                {{work.category.name}}
+            </div>
+
+            {% if work.image %}
+            <img src="{{ work.image.url }}" alt="{{ work.name }}" class="work-image">
+            {% else %}
+            <img src="/media/work/images/.jpg" alt="{{ work.name }}" class="work-image">
+            {% endif %}
+
+        </div>
+
+        <div class="work-content">
+
+            <div class="work-name">
+              {{work.name}}
+            </div>
+
+            <div class="work-explanation">
+              {{work.content}}<br><br><br>
+            </div>
+
+            <div class="work-tag-list">
+              {% for tag in work.tag.all %}
+                  <span class="work-tag">
+                    #{{tag.name}}
+                  </span>
+              {% endfor %}
+            </div>
+
+        </div>
+
+        <div>
+        </div>
+    </a>
+    {% endfor %}
+    {% else %}
+    works
+    {% endif %}
+</div>
+</body>

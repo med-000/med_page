@@ -1,0 +1,106 @@
+.work-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: flex-start;
+  padding: 20px;
+}
+
+.work-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  background-color: black; 
+  border-radius: 16px;
+  border: 2px solid white;
+  overflow: hidden;
+  text-decoration: none;
+  color: white;
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.work-card:hover {
+  transform: translateY(-4px);
+
+}
+.image-content {
+  position: relative;
+  width: 100%;
+  height: 180px;
+}
+
+.work-category {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: #888;
+  color: white;
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  z-index: 1;
+  pointer-events: none;
+}
+
+
+.work-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  background-color: #fff;
+}
+
+.work-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.work-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.work-explanation {
+  font-size: 14px;
+  color: #ccc;
+  margin-bottom: 8px;
+}
+
+.work-tag-list {
+  position: absolute;
+  bottom: 8px;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+.work-tag {
+  background-color: black;
+  color: white;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid white;
+}
+
+@media (max-width: 600px) {
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);  /* 横2列 */
+    gap: 16px;
+  }
+
+  .work-card {
+    width: 100%; /* gridが幅を制御するので全幅 */
+    margin: 0;
+  }
+}
+
+

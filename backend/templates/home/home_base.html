@@ -6,6 +6,8 @@
     <title>{% block titile %}med page{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'work/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'product/css/style.css' %}">
     <script src="https://unpkg.com/htmx.org@1.9.10"></script>
 </head>
 <body>
@@ -60,16 +62,16 @@
 
         <div class = "content">
             <button class="content-bottun active"
-                hx-get="/works"
-                hx-target="#output"
-                hx-swap="innerHTML">
-                works
-            </button>
-            <button class="content-bottun"
                 hx-get="/history"
                 hx-target="#output"
                 hx-swap="innerHTML">
                 history
+            </button>
+            <button class="content-bottun"
+                hx-get="/work"
+                hx-target="#output"
+                hx-swap="innerHTML">
+                works
             </button>
             <button class="content-bottun"
                 hx-get="/miniblog"
@@ -78,7 +80,7 @@
                 miniblog
             </button>
             <button class="content-bottun"
-                hx-get="/products"
+                hx-get="/product"
                 hx-target="#output"
                 hx-swap="innerHTML">
                 products
@@ -97,8 +99,8 @@
             </button>
         </div>
         <div class="content-main" id="output">
-            {% include "templates/miniblog/miniblog_base.html" %}
-            {% block miniblog %}{% endblock %}
+            {% include "templates/history/history_base.html" %}
+            {% block hisitory_base %}{% endblock %}
         </div>
     </main>
     {% endblock %}
