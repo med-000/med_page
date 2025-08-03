@@ -1,5 +1,9 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'work/css/style.css' %}">
 <body>
-
+<div class="work">
+    Works
+</div>
 <div class="work-grid">
     {% if works %}
     {% for work in works%}

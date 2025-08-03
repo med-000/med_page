@@ -1,3 +1,14 @@
+body {
+    background-color:black;
+}
+.history {
+    color:white;
+    font-size: 50px;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-weight: bold;
+    text-align: center; 
+    margin-top: 40px;
+}
 .history-list {
   display: flex;
   justify-content: center;

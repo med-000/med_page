@@ -321,10 +321,20 @@ html, body {
 
 }
 
+.header-plus {
+  color:white;
+  padding:20px;
+  border-top: 2px solid white;
+  border-bottom: 2px solid white;
+  padding-left:40px;
+  font-size:15px;
+}
 
+.header-plus a{
+  color:white;
+}
 /*ここからprofile.htmlのcss*/
 .profile-main {
-  border-top: 2px solid white;
   font-family: 'Helvetica', 'Arial', sans-serif;
 }
 

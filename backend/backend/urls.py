@@ -23,12 +23,12 @@ urlpatterns = [
     path('',include('home.urls')),
     path('markdownx/',include('markdownx.urls')),
     path('history',include('history.urls')),
-    path('miniblog',include('miniblog.urls')),
+    path('information',include('miniblog.urls')),
     path('product',include('product.urls')),
     path('techstack',include('techstack.urls')),
     path('work',include('work.urls')),
     path('blog', include('blog.urls',namespace='blog')),
-    
+    path('link',include('link.urls')),
 ]
 urlpatterns += static(
     settings.MEDIA_URL,

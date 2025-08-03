@@ -1,5 +1,19 @@
 {% extends 'home/home_base.html' %}
 {% load static %}
+{% block title %}
+med profile
+{% endblock %}
+{% block header-plus %}
+<div class="header-plus">
+<a href="{% url 'home' %}">
+    top
+</a>
+>
+<a href="{% url 'profile'%}">
+    profile
+</a>
+</div>
+{% endblock %}
 {% block main %}
     <main class="profile-main">
         <h1 class="profile">

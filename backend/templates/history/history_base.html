@@ -1,4 +1,10 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'history/css/style.css' %}">
+<div class="history">
+    History
+</div>
 {% for year, history_list in group_histories.items %}
+
   <div class="history-list">
     <div class="history-year-list">
       <h2>{{ year }}</h2>

@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="{% static 'work/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'product/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'history/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'miniblog/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'techstack/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'link/css/style.css' %}">
     <script src="https://unpkg.com/htmx.org@1.9.10"></script>
 </head>
 <body>
@@ -37,9 +40,11 @@
                 </div>
                 </div>
             </div>
-
         </div>
     </header>
+    {% block header-plus %}
+    {% endblock%}
+
     {% block main %}
     <div class = "header-image">
         <img src="{{ aboutme.headerimage.url }}" alt="Header Image">
@@ -62,41 +67,41 @@
         </a>
 
         <div class = "content">
-            <button class="content-bottun active"
+            <button class="content-bottun active "id=history
                 hx-get="/history"
                 hx-target="#output"
                 hx-swap="innerHTML">
-                history
+                History
             </button>
-            <button class="content-bottun"
+            <button class="content-bottun" id=work
                 hx-get="/work"
                 hx-target="#output"
                 hx-swap="innerHTML">
-                works
+                Works
             </button>
-            <button class="content-bottun"
-                hx-get="/miniblog"
+            <button class="content-bottun"id=information
+                hx-get="/information"
                 hx-target="#output"
                 hx-swap="innerHTML">
-                miniblog
+                Information
             </button>
-            <button class="content-bottun"
+            <button class="content-bottun"id=product
                 hx-get="/product"
                 hx-target="#output"
                 hx-swap="innerHTML">
-                products
+                Products
             </button>
-            <button class="content-bottun"
+            <button class="content-bottun"id=techstack
                 hx-get="/techstack"
                 hx-target="#output"
                 hx-swap="innerHTML">
-                techstack
+                TechStack
             </button>
-            <button class="content-bottun"
-                hx-get="/techstack"
+            <button class="content-bottun"id=link
+                hx-get="/link"
                 hx-target="#output"
                 hx-swap="innerHTML">
-                links
+                Links
             </button>
         </div>
         <div class="content-main" id="output">

@@ -1,0 +1,152 @@
+
+body {
+    background-color:black;
+}
+.miniblog {
+    color:white;
+    font-size: 50px;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-weight: bold;
+    text-align: center; 
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.miniblog-card {
+  display: block;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 16px 20px 12px;
+  background-color: #111;
+  color: #eee;
+  border-bottom: 1px solid #333;
+  text-decoration: none;
+  position: relative;
+  font-family: sans-serif;
+  transition: background-color 0.2s;
+}
+
+.miniblog-card:hover {
+  background-color: #1a1a1a;
+}
+
+.miniblog-category {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background-color: #555;
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+.miniblog-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.miniblog-summary {
+  font-size: 14px;
+  color: #ccc;
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+
+.miniblog-day {
+  font-size: 13px;
+  color: #888;
+  text-align: right;
+  margin-top: 6px;
+}
+
+.miniblog-tag {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.miniblog-tag .tag {
+  font-size: 12px;
+  padding: 4px 10px;
+  border: 1px solid #aaa;
+  border-radius: 999px;
+  color: white;
+}
+
+@media (max-width: 600px) {
+  .miniblog-card {
+    padding: 14px 16px 10px;
+  }
+
+  .miniblog-title {
+    font-size: 16px;
+  }
+
+  .miniblog-summary {
+    font-size: 13px;
+  }
+
+  .miniblog-day {
+    font-size: 12px;
+  }
+
+  .miniblog-category {
+    font-size: 12px;
+    padding: 3px 10px;
+  }
+
+  .miniblog-tag .tag {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+}
+
+.header-plus {
+  color:white;
+  padding:20px;
+  border-top: 2px solid white;
+  border-bottom: 2px solid white;
+  padding-left:40px;
+  font-size:15px;
+}
+
+.header-plus a{
+  color:white;
+}
+/*ここからminiblog_pre*/
+
+.information-content {
+    color: white;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+.information-title {
+    margin-top: 15px;
+    margin-bottom : 10px;
+    margin-left: 20px;
+    margin-right: 20px ;
+    font-size:40px;
+    background-color:white;
+    color: black;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.information-main-content {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.information-date {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.information-text {
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size:30px;
+}

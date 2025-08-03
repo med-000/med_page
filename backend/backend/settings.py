@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'work',
     'product',
     'history',
+    'miniblog',
+    'link',
 ]
 
 MIDDLEWARE = [

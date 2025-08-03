@@ -1,5 +1,30 @@
-{% block miniblog %}
-<h1>
-    miniblog
-</h1>
-{% endblock %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'miniblog/css/style.css' %}">
+<div class="miniblog-list">
+<div class="miniblog">
+    Information
+</div>
+{% if miniblogs %}
+    {% for miniblog in miniblogs %}
+    <a class="miniblog-card" href="{%url 'miniblog_pre' miniblog.id%}">
+        <div class="miniblog-content">
+            <div class="miniblog-category">
+                {{miniblog.category.name}}
+            </div>
+            <div class="miniblog-title">
+                {{miniblog.title}}
+            </div>
+            <div class="miniblog-summary">
+                {{miniblog.summary}}
+            </div>
+            <div class="miniblog-day">
+                {{miniblog.created_day|date:"Y/m/d"}}
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+{% else %}
+www
+{% endif %}
+</div>

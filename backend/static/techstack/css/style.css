@@ -1,0 +1,13 @@
+body {
+    background-color:black;
+}
+
+.techstack {
+    color:white;
+    font-size: 50px;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-weight: bold;
+    text-align: center; 
+    margin-top: 40px;
+    margin-bottom:40px;
+}

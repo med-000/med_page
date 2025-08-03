@@ -1,0 +1,40 @@
+{% extends 'home/home_base.html' %}
+{% load app %}
+{% load static %}
+{% block title %}
+med information
+{% endblock %}
+{% block header-plus %}
+<div class="header-plus">
+<a href="{% url 'home' %}">
+    top
+</a>
+>
+<a href="/information">
+    Information
+</a>
+>
+<a href="{%url 'miniblog_pre' miniblog.id%}">
+    {{miniblog.title}}
+</a>
+</div>
+{% endblock %}
+{% block main %}
+<main>
+<div class="information-content">
+    <div class="information-title">
+        {{ miniblog.title }}
+    </div>
+    <div class="information-main-content">
+    <div class="information-date">
+        {{ miniblog.created_day|date:"Y/m/d" }}
+    </div>
+    <div class="information-text">
+        {{ miniblog.content|markdown_to_html|safe }}
+    </div>
+    </div>
+</div>
+</main>
+<footer>
+</footer>
+{% endblock %}
