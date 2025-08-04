@@ -1,9 +1,4 @@
-from django.shortcuts import render
-from .models import SocialLink,AboutMe
-from collections import defaultdict
-from django.db.models.functions import ExtractYear
-from history.models import History
-# Create your views here.
+
 from django.shortcuts import render
 from .models import SocialLink, AboutMe
 from collections import defaultdict
