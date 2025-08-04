@@ -4,7 +4,7 @@
 <!-- ヘッダー -->
 <header class="site-header">
   <div class="title-block">
-    <h1><a href="{% url 'home' %}">med's blog</a></h1>
+    <h1><a href="{% url 'blog:home' %}">med's blog</a></h1>
   </div>
   <br>
   <nav class="category-block">
@@ -29,7 +29,7 @@
     </p>
 
     <div class="category-tag">
-      <a class="label" href="{% url 'category_filter' article.category.name %}">
+      <a class="label" href="{% url 'blog:category_filter' article.category.name %}">
         /{{ article.category }}
       </a>
       {% for tag in article.tag.all %}
@@ -125,7 +125,7 @@
 
 <!-- 認証チェック（編集リンク） -->
 {% if user.is_authenticated %}
-  <p><a href="{% url 'article_edit' article.pk %}">記事を編集</a></p>
+  <p><a href="{% url 'blog:article_edit' article.pk %}">記事を編集</a></p>
 {% endif %}
 
 <!-- ハイライト用テーマ（ダーク） -->

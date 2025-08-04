@@ -3,7 +3,7 @@
 
   {% for category in sidebar_categories %}
     <li class="nav-item dropdown">
-      <a href="{% url 'category_filter' category.name %}">{{ category.name }}</a>
+      <a href="{% url 'blog:category_filter' category.name %}">{{ category.name }}</a>
       {% if category.tag.all %}
         <ul class="dropdown-menu">
           {% for tag in category.tag.all %}

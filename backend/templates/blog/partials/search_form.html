@@ -1,5 +1,5 @@
 <div class="search-box">
-  <form action="{% url 'search' %}" method="get">
+  <form action="{% url 'blog:search' %}" method="get">
     <input type="search" name="q"
       placeholder="検索ワードを入力"
       value="{% if searched %}{{ searched }}{% else %}{{ text_search }}{% endif %}"

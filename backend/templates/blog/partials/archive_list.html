@@ -3,7 +3,7 @@
   <ul class="footer-archive-list">
     {% for item in sidebar_archive_dates %}
       <li>
-        <a href="{% url 'archive' item.date.year item.date.month item.date.day %}">
+        <a href="{% url 'blog:archive' item.date.year item.date.month item.date.day %}">
           {{ item.date|date:"Y年n月j日" }}（{{ item.count }}件）
         </a>
       </li>

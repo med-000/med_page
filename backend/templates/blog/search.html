@@ -38,7 +38,7 @@
   <div class="article-grid">
     {% if articles %}
       {% for article in articles %}
-        <a class="article-card" href="{% url 'article' article.id %}">
+        <a class="article-card" href="{% url 'blog:article' article.id %}">
           {% if article.thumbnail %}
             <img src="{{ article.thumbnail.url }}" alt="{{ article.title }}" class="article-image" />
           {% else %}

@@ -1,6 +1,6 @@
 <div class="sidebar-article-list">
   {% for article in sidebar_view_ranking_articles %}
-    <a href="{% url 'article' article.id %}" class="sidebar-article-card">
+    <a href="{% url 'blog:article' article.id %}" class="sidebar-article-card">
       
       <div class="ranking-badge">
         {{ forloop.counter }}
