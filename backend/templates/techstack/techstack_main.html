@@ -1,0 +1,27 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'techstack/css/style.css' %}">
+<div class="techstack-container">
+    {% for techstack in techstacks %}
+      <div class="techstack-card">
+        <div class="techstack-header">
+          <div class="techstack-image">
+            {% if techstack.image %}
+              <img src="{{ techstack.image.url }}" alt="{{ techstack.name }}">
+            {% else %}
+              <img src="/media/blog/images/noImage.jpg" alt="{{ techstack.name }}">
+            {% endif %}
+          </div>
+          <div class="techstack-name">{{ techstack.name }}</div>
+        </div>
+
+        <div class="techstack-progress-bar">
+          <div class="techstack-progress" style="width: {{ techstack.percent }}%;"></div>
+        </div>
+
+        <div class="techstack-hidden">
+          <div class="techstack-content">{{ techstack.content }}</div>
+          <div class="techstack-time">⏱ {{ techstack.display_time }}</div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>

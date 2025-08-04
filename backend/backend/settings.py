@@ -14,8 +14,6 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 load_dotenv()
-print("DEBUG: SECRET_KEY =", os.getenv("SECRET_KEY"))
-print("DEBUG: ALLOWED_HOSTS =", os.getenv("ALLOWED_HOSTS"))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -46,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'markdownx',
+    'django_htmx',
     'home',
     'blog',
     'work',
@@ -53,6 +52,7 @@ INSTALLED_APPS = [
     'history',
     'miniblog',
     'link',
+    'techstack',
 ]
 
 MIDDLEWARE = [
@@ -63,6 +63,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_htmx.middleware.HtmxMiddleware',
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -156,3 +157,5 @@ STATICFILES_DIRS = [
 STATIC_URL = '/static/'
 
 
+WAKATIME_API_KEY=os.environ.get("WAKATIME_API_KEY")
+WAKATIME_API_URL=f"https://api.wakatime.com/api/v1/users/current/stats/all_time?api_key={WAKATIME_API_KEY}"

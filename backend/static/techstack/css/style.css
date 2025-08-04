@@ -11,3 +11,248 @@ body {
     margin-top: 40px;
     margin-bottom:40px;
 }
+
+.techstack-title {
+  color: white;
+  font-size: 2.5rem;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-weight: bold;
+  text-align: center;
+  margin: 40px 0;
+}
+.techstack-container-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 40px;
+}
+
+.techstack-container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  justify-content: center;
+  gap: 20px;
+}
+
+.techstack-card {
+  background-color: #000;
+  border: 2px solid white;
+  border-radius: 15px;
+  width: 220px;
+  height: 180px;
+  padding: 12px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+
+.techstack-card:hover .techstack-header,
+.techstack-card:hover .techstack-progress-bar {
+  filter: blur(4px);
+  opacity: 0.3;
+}
+
+
+.techstack-card:hover .techstack-hidden {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.techstack-header {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.techstack-image img {
+  width: 50px;
+  height: 50px;
+  border-radius: 6px;
+  object-fit: cover;
+  background: #222;
+}
+
+
+.techstack-name {
+  font-size: 0.95rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.techstack-progress-bar {
+  width: 100%;
+  height: 22px;
+  border: 2px solid white;
+  border-radius: 5px;
+  background-color: black;
+  margin-top: 8px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.techstack-progress-bar::after {
+  content: '';
+  position: absolute;
+  right: -6px;
+  top: 5px;
+  width: 5px;
+  height: 12px;
+  background-color: white;
+  border-radius: 1px;
+}
+
+.techstack-progress {
+  height: 100%;
+  background-color: white;
+  width: 0%;
+  text-align: left;
+  padding-left: 5px;
+  color: black;
+  font-weight: bold;
+  line-height: 22px;
+  border-radius: 4px 0 0 4px;
+  transition: width 0.4s ease;
+  font-size: 0.85rem;
+}
+
+.techstack-hidden {
+  position: absolute;
+  color: white;
+  opacity: 0;
+  top: 50px;
+  left: 50px;
+  right: 50px;
+  transform: translateY(20%);
+  transition: all 0.4s ease;
+  pointer-events: none;
+}
+
+.techstack-content {
+  font-size: 1rem;
+  margin-bottom: 3px;
+}
+
+.techstack-time {
+  font-size: 1rem;
+}
+
+
+/*ここからbase*/
+.category-filter {
+  padding-left: 90px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin: 1.5rem 0;
+}
+
+.category-filter input[type="radio"] {
+  display: none;
+}
+
+.category-button {
+  padding: 0.6rem 1.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.5rem;
+  background:black;
+  color: white;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: inset 0 0 0 0 transparent;
+}
+
+.category-button:hover {
+  background: rgb(63, 63, 63);
+  border-color: black;
+}
+
+input[type="radio"]:checked + .category-button {
+  background: black;
+  border: 2px solid white;
+  box-shadow:white;
+}
+
+/*スマホ用*/
+/* スマホ対応（768px以下） */
+@media (max-width: 768px) {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  .techstack {
+    font-size: 2rem;
+    margin: 30px 0;
+  }
+
+  .category-filter {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0 10px;
+    gap: 0.6rem;
+  }
+
+  .category-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .techstack-container-wrapper {
+    margin-top: 30px;
+    padding: 0 10px;
+  }
+
+  .techstack-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    max-width: 100%;
+  }
+
+  .techstack-card {
+    width: calc(50% - 10px); /* gapを考慮して2列 */
+    height: 170px;
+    padding: 10px;
+  }
+
+  .techstack-header {
+    margin-top: 10px;
+    gap: 4px;
+  }
+
+  .techstack-name {
+    font-size: 0.85rem;
+  }
+
+  .techstack-progress-bar {
+    height: 18px;
+  }
+
+  .techstack-progress {
+    font-size: 0.75rem;
+  }
+
+  .techstack-hidden {
+    top: 40px;
+    left: 20px;
+    right: 20px;
+    font-size: 0.75rem;
+  }
+
+  .techstack-content,
+  .techstack-time {
+    font-size: 0.75rem;
+  }
+}

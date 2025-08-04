@@ -1,5 +1,22 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'techstack/css/style.css' %}">
+
 <div class="techstack">
-    TechStack
+  TechStack
+</div>
+
+<div class="category-filter">
+  <form hx-get="/techstack/main" hx-target="#techstack-list" hx-trigger="change">
+    <input type="radio" name="category_id" value="0" id="category-0" checked>
+    <label for="category-0" class="category-button">All</label>
+
+    {% for category in categories %}
+      <input type="radio" name="category_id" value="{{ category.id }}" id="category-{{ category.id }}">
+      <label for="category-{{ category.id }}" class="category-button">{{ category.name }}</label>
+    {% endfor %}
+  </form>
+</div>
+
+<div class="techstack-container-wrapper" id="techstack-list">
+  {% include "techstack/techstack_main.html" %}
 </div>
