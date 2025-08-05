@@ -2,7 +2,7 @@
 <ul class="footer-category-filter-list">
   {% for category in sidebar_categories %}
     <li>
-      <a href="{% url 'blog;category_filter' category.name %}">
+      <a href="{% url 'blog:category_filter' category.name %}">
         {{ category.name }}
       </a>
     </li>

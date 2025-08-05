@@ -1,4 +1,4 @@
-<form method="post" action="{% url 'login' %}?next={{ request.GET.next|default:'home_edit' }}">
+<form method="post" action="{% url 'blo:login' %}?next={{ request.GET.next|default:'home_edit' }}">
   {% csrf_token %}
   {{ form.as_p }}
   <button type="submit">ログイン</button>
