@@ -53,11 +53,12 @@
     {{ article.content|markdown_to_html|safe }}
   </div>
 
-  <!-- サイドバー目次 -->
+  <!-- サイドバー目次 
   <aside class="toc-sidebar">
     <h4>目次</h4>
     {% extract_toc article.content %}
   </aside>
+-->
 </div>
 
 <!-- コメントセクション -->
@@ -143,5 +144,15 @@
 
   backToTopBtn.addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', function () {
+    if (window.innerWidth <= 768) {
+      const tocSidebar = document.querySelector('.toc-sidebar');
+      if (tocSidebar) {
+        tocSidebar.style.display = 'none';
+      }
+    }
   });
 </script>
