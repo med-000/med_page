@@ -27,7 +27,7 @@ urlpatterns = [
     path('product',include('product.urls')),
     path('techstack',include('techstack.urls')),
     path('work',include('work.urls')),
-    path('blog', include('blog.urls',namespace='blog')),
+    path('blog/', include('blog.urls',namespace='blog')),
     path('link',include('link.urls')),
 ]
 urlpatterns += static(

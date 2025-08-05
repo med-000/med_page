@@ -917,11 +917,11 @@ html, body {
     position: fixed;
     top: 1rem;
     right: 1rem;
-    background: black;
+    background: white;
     color: white;
     padding: 0.5rem 1rem;
     z-index: 999;
-    border-radius: 4px;
+    border-radius: 50%;
   }
 
   .mobile-sidebar {
@@ -945,24 +945,42 @@ html, body {
 
 /* PC用はモバイルUIを非表示 */
 @media (min-width: 769px) {
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: black; /* 背景色をしっかり指定しないと下の要素が透ける */
+    padding: 0.75rem 1rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+
+  body {
+    padding-top: 70px; /* 固定ヘッダーの高さ分余白を追加 */
+  }
   .mobile-sidebar-toggle,
   .mobile-sidebar {
     display: none !important;
   }
 }
 .mobile-sidebar-toggle {
+  position: fixed;
   box-shadow: none !important;
   outline: none !important;
   border: none;
   background-color: black;
   color: white;
-  padding: 0.5rem 1rem;
-  z-index: 999;
-  border-radius: 4px;
-  appearance: none; /* Safari対策 */
+  padding: 0rem 0.5rem;
+  z-index: 1100;
+  appearance: none; 
   -webkit-appearance: none; /* iOS対策 */
   font-size:40px;
-  top:-0.2rem;
+  top:0rem;
+  border-radius: 4px;
+  width:auto;
+  height:auto;
+
 }
 .mobile-sidebar-toggle:hover,
 .mobile-sidebar-toggle:focus {
@@ -971,6 +989,25 @@ html, body {
 }
 
 @media (max-width: 768px) {
+  .article-grid {
+    grid-template-columns: 1fr; /* ← これで1列化 */
+    padding: 1rem;
+    gap: 1.5rem;
+  }
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: black;
+    padding: 0.75rem 1rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+
+  body {
+    padding-top: 70px; /* ヘッダーの高さ分、余白を追加 */
+  }
   .article-layout {
     padding: 1rem;
   }
