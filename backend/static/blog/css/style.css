@@ -900,3 +900,70 @@ html, body {
   text-decoration: none;
   color: inherit;
 }
+/* モバイル用CSS */
+@media (max-width: 768px) {
+  .sidebar-block,
+  .site-footer .archive-block,
+  .site-footer .sidebar-category-block,
+  .site-footer .about-block,
+  .site-footer .tag-filter-block {
+    display: none;
+  }
+
+  .mobile-sidebar-toggle {
+    display: block;
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    background: black;
+    color: white;
+    padding: 0.5rem 1rem;
+    z-index: 999;
+    border-radius: 4px;
+  }
+
+  .mobile-sidebar {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 80%;
+    height: 100%;
+    background: #f8f8f8;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    z-index: 998;
+    overflow-y: auto;
+  }
+
+  .mobile-sidebar.open {
+    display: block;
+  }
+}
+
+/* PC用はモバイルUIを非表示 */
+@media (min-width: 769px) {
+  .mobile-sidebar-toggle,
+  .mobile-sidebar {
+    display: none !important;
+  }
+}
+.mobile-sidebar-toggle {
+  box-shadow: none !important;
+  outline: none !important;
+  border: none;
+  background-color: black;
+  color: white;
+  padding: 0.5rem 1rem;
+  z-index: 999;
+  border-radius: 4px;
+  appearance: none; /* Safari対策 */
+  -webkit-appearance: none; /* iOS対策 */
+  font-size:40px;
+  top:-0.2rem;
+}
+.mobile-sidebar-toggle:hover,
+.mobile-sidebar-toggle:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
