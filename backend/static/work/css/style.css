@@ -105,14 +105,14 @@ body {
 
 @media (max-width: 600px) {
   .work-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);  /* 横2列 */
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
     gap: 16px;
   }
 
   .work-card {
-    width: 100%; /* gridが幅を制御するので全幅 */
-    margin: 0;
+    width: 90%; 
   }
 }
 

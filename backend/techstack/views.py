@@ -34,45 +34,40 @@ def techstack_main(request):
 
 
         for lang in langs:
-            if TechStack.objects.filter(name=lang["name"]).exists():
-                TechStack.objects.filter(name=lang["name"]).update(
-                    percent=lang["percent"],
-                    time=lang["total_seconds"],
-                    category=language_category,
-                )
-            else:
+            try:
+                obj = TechStack.objects.get(name=lang["name"])
+                obj.percent = lang["percent"]
+                obj.time = lang["total_seconds"]
+                obj.category = language_category
+                obj.save()
+            except TechStack.DoesNotExist:
                 TechStack.objects.create(
                     name=lang["name"],
                     content="編集中",
                     percent=lang["percent"],
                     time=lang["total_seconds"],
                     category=language_category,
-                    public=True
-                
+                    public=True 
                 )
 
+
         for dependence in dependencies:
-            if TechStack.objects.filter(name=dependence["name"]).exists():
-                TechStack.objects.filter(name=dependence["name"]).update(
-                    percent=dependence["percent"],
-                    time=dependence["total_seconds"],
-                    category=dependencies_category,
-                )
-            else:
+            try:
+                obj = TechStack.objects.get(name=dependence["name"])
+                obj.percent = dependence["percent"]
+                obj.time = dependence["total_seconds"]
+                obj.category = dependencies_category
+                obj.save()
+            except TechStack.DoesNotExist:
                 TechStack.objects.create(
                     name=dependence["name"],
                     content="編集中",
                     percent=dependence["percent"],
                     time=dependence["total_seconds"],
                     category=dependencies_category,
-                     public=True
+                    public=True
                 )
-        if request.method =='GET':
-            category_id=request.GET.get('category_id')
-            if category_id and category_id != '0':
-                techstacks = TechStack.objects.filter(category_id=category_id)
-            else:
-                techstacks = TechStack.objects.all()
+
 
         techstacks=techstacks.filter(public=True)
 
